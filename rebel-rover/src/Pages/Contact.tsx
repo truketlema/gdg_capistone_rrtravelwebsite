@@ -17,7 +17,7 @@ export const Contact = () => {
           <p className="text-sm mt-2">Home &gt; Contact</p>
         </div>
       </div>
-
+      <div className="[height:138px]"></div>
       {/* Contact Form & Info */}
       <div className="flex flex-col md:flex-row justify-between w-full mx-auto p-5 bg-[#ffffff]">
         {/* Form */}
