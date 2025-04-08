@@ -8,10 +8,12 @@ import { Profile } from './Pages/Profile';
 import { Packages } from './Pages/Packages';
 import { SignUp } from './Pages/SignUp';
 import './App.css';
+import Header from './Components/Header';
 
 function App() {
   return (
     <div className="App">
+      <Header />
       <Routes>
         <Route path='/' Component={Home} />
         <Route path='/about_us' Component={AboutUs} />

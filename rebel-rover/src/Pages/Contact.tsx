@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMapPin, faPhone, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import contact from '../assets/contacts.png';
 
-const Contact = () => {
+export const Contact = () => {
   return (
     <div className="w-full">
       {/* Image */}
@@ -118,5 +118,4 @@ const Contact = () => {
     </div>
   );
 };
-export default Contact;
-}
+
