@@ -57,66 +57,73 @@ export default function Footer() {
           </form>
         </div>
       </div>
-      <div className="flex flex-col md:flex-row justify-between items-center gap-4 p-6 text-black">
-        <div className="text-black bg-white">
+      <div className="flex flex-row justify-center gap-8 items-start py-6 px-8 text-black mx-auto">
+        <div className="text-black bg-white w-[25%]">
           <img src={logo} alt="Logo" width="250" height="40" />
-          <p>
+          <p className="opacity-7s0">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
             pharetra condimentum.
           </p>
         </div>
-        <div>
-          <h3>Contact Information</h3>
-          <p>
-            <FaLocationDot />
-            732 Despard St, Atlanta
-          </p>
-          <p>
-            <MdEmail />
-            +97 888 8888
-          </p>
-          <p>
-            <FaPhone />
-            info@traveller.com
-          </p>
+
+        <div className="w-[25%] flex justify-center items-center ">
+          <div className="gap-3">
+            <h3 className="font-semibold">Contact Information</h3>.
+            <p className="flex flex-row pb-2 opacity-70">
+              <FaLocationDot />
+              732 Despard St, Atlanta
+            </p>
+            <p className="flex flex-row pb-2 opacity-70">
+              <MdEmail />
+              +97 888 8888
+            </p>
+            <p className="flex flex-row opacity-70 ">
+              <FaPhone />
+              info@traveller.com
+            </p>
+          </div>
         </div>
-        <div>
-          <h3>Quick Link</h3>
+        <div className="w-[25%] flex justify-center items-center">
           <ul>
-            <li>
+            <h3 className="font-semibold pb-3 ">Quick Link</h3>
+            <li className="pb-2 opacity-70">
               <Link to="/">Home</Link>
             </li>
-            <li>
-              <Link to="/packages">Package</Link>
+            <li className="pb-2 opacity-70">
+              <Link to="/aboutus">About us</Link>
             </li>
-            <li>
-              <Link to="#">Destination</Link>
+            <li className="pb-2 opacity-70">
+              <Link to="#">Tours</Link>
             </li>
-            <li>
-              <Link to="#">Blog</Link>
-            </li>
-            <li>
-              <Link to="#">Contact</Link>
+            <li className="pb-2 opacity-70">
+              <Link to="/contact">Contact</Link>
             </li>
           </ul>
         </div>
-        <div>
-          <h3>Follow us</h3>
-          <ul>
-            <li>
-              <MdFacebook />
-            </li>
-            <li>
-              <FaTwitter />
-            </li>
-            <li>
-              <FaYoutube />
-            </li>
-            <li>
-              <FaInstagram />
-            </li>
-          </ul>
+        <div className="w-[25%] flex flex-row justify-center items-center ">
+          <div>
+            <h3 className="font-semibold">Follow us</h3>
+            <ul className="flex flex-row gap-4 pt-3 opacity-70">
+              <li>
+                <MdFacebook />
+              </li>
+              <li>
+                <FaTwitter />
+              </li>
+              <li>
+                <FaYoutube />
+              </li>
+              <li>
+                <FaInstagram />
+              </li>
+            </ul>
+          </div>
         </div>
+      </div>
+      {/* copy right section */}
+      <div className="bg-black text-white text-center py-8 text-opacity-70">
+        Copyright © All rights reserved (Website Developed & Managed by
+        creativechroma)
       </div>
     </div>
   );

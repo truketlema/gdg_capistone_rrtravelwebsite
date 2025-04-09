@@ -90,13 +90,11 @@ export default function Home() {
         "Before we define any approach, we need to deline the brands overall goal. We then need to dive.",
     },
   ];
-  // State to track the current slide index
+
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Calculate the maximum index
   const maxIndex = testimonials.length - 3;
 
-  // Functions to handle navigation
   const nextSlide = () => {
     setCurrentIndex((prevIndex) => (prevIndex >= maxIndex ? 0 : prevIndex + 1));
   };
@@ -167,7 +165,7 @@ export default function Home() {
             />
           </div>
           <div className="shadow-xl rounded-2xl">
-            <img src={oceanimage} alt="" width={400} height={0} />
+            <img src={oceanimage} alt="" width={500} height={0} />
             <div className="pl-3 pt-6 pb-4">
               <h1 className="font-bold text-[20px]">Bali, Indonesia.</h1>
               <p className="opacity-70 leading-[1.6] whitespace-pre-line">
