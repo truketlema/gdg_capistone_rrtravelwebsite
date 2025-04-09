@@ -39,7 +39,7 @@ export default function Footer() {
         <div>
           <form
             onSubmit={handleSubmit}
-            className="flex  justify-between items-center bg-white rounded-full px-1 pl-3 py-1 w-[40vw] mx-auto m-0 mt-16"
+            className="flex  justify-between items-center bg-white rounded-full px-1 pl-3 py-1 w-[70vw]  md:w-[60vw] lg:w-[40vw] mx-auto m-0 mt-16"
           >
             <input
               onChange={(e) => setEmail(e.target.value)}
@@ -57,69 +57,68 @@ export default function Footer() {
           </form>
         </div>
       </div>
-      <div className="flex flex-row justify-center gap-8 items-start py-6 px-8 text-black mx-auto">
-        <div className="text-black bg-white w-[25%]">
+      <div className="flex flex-wrap justify-center gap-4 items-start py-6  text-black mx-auto text-sm sm:text-[15px] md:text-base">
+        <div className=" max-w-[300px] flex flex-col gap-4 items-start min-w-[150px]">
           <img src={logo} alt="Logo" width="250" height="40" />
-          <p className="opacity-7s0">
+          <p className="opacity-70">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
             pharetra condimentum.
           </p>
         </div>
 
-        <div className="w-[25%] flex justify-center items-center ">
-          <div className="gap-3">
-            <h3 className="font-semibold">Contact Information</h3>.
-            <p className="flex flex-row pb-2 opacity-70">
-              <FaLocationDot />
-              732 Despard St, Atlanta
-            </p>
-            <p className="flex flex-row pb-2 opacity-70">
-              <MdEmail />
-              +97 888 8888
-            </p>
-            <p className="flex flex-row opacity-70 ">
-              <FaPhone />
-              info@traveller.com
-            </p>
-          </div>
+        <div className=" max-w-[300px] flex flex-col gap-2 items-start min-w-[150px]">
+          <h3 className="font-semibold">Contact Information</h3>
+          <p className="flex items-center gap-2 opacity-70">
+            <FaLocationDot />
+            732 Despard St, Atlanta
+          </p>
+          <p className="flex items-center gap-2 opacity-70">
+            <MdEmail />
+            +97 888 8888
+          </p>
+          <p className="flex items-center gap-2 opacity-70">
+            <FaPhone />
+            info@traveller.com
+          </p>
         </div>
-        <div className="w-[25%] flex justify-center items-center">
-          <ul>
-            <h3 className="font-semibold pb-3 ">Quick Link</h3>
-            <li className="pb-2 opacity-70">
+
+        <div className=" max-w-[300px] flex flex-col gap-2 items-start min-w-[150px]">
+          <h3 className="font-semibold pb-1">Quick Link</h3>
+          <ul className="space-y-1 opacity-70">
+            <li>
               <Link to="/">Home</Link>
             </li>
-            <li className="pb-2 opacity-70">
+            <li>
               <Link to="/aboutus">About us</Link>
             </li>
-            <li className="pb-2 opacity-70">
+            <li>
               <Link to="#">Tours</Link>
             </li>
-            <li className="pb-2 opacity-70">
+            <li>
               <Link to="/contact">Contact</Link>
             </li>
           </ul>
         </div>
-        <div className="w-[25%] flex flex-row justify-center items-center ">
-          <div>
-            <h3 className="font-semibold">Follow us</h3>
-            <ul className="flex flex-row gap-4 pt-3 opacity-70">
-              <li>
-                <MdFacebook />
-              </li>
-              <li>
-                <FaTwitter />
-              </li>
-              <li>
-                <FaYoutube />
-              </li>
-              <li>
-                <FaInstagram />
-              </li>
-            </ul>
-          </div>
+
+        <div className=" max-w-[300px] flex flex-col gap-2 items-start min-w-[150px]">
+          <h3 className="font-semibold">Follow us</h3>
+          <ul className="flex flex-row gap-4 pt-2 opacity-70">
+            <li>
+              <MdFacebook />
+            </li>
+            <li>
+              <FaTwitter />
+            </li>
+            <li>
+              <FaYoutube />
+            </li>
+            <li>
+              <FaInstagram />
+            </li>
+          </ul>
         </div>
       </div>
+
       {/* copy right section */}
       <div className="bg-black text-white text-center py-8 text-opacity-70">
         Copyright © All rights reserved (Website Developed & Managed by

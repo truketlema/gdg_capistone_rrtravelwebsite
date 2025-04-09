@@ -1,10 +1,12 @@
+"use client";
+
 import suitcase from "../assets/suitcaseimage.png";
 import Header from "../Components/Header";
 import { Link } from "react-router-dom";
 import { FaLongArrowAltRight } from "react-icons/fa";
 import { IoMdStar } from "react-icons/io";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import happytravelimage from "../assets/happytravelimage.png";
 import whychooseusbg from "../assets/whychooseusbgimage.png";
 import oceanimage from "../assets/oceanImage.png";
@@ -24,6 +26,17 @@ import testifier4 from "../assets/testifier4.jpg";
 import testifier5 from "../assets/testifier5.jpg";
 import testifier6 from "../assets/testifier6.jpg";
 import Footer from "../Components/Footer";
+import axios from "axios";
+
+interface Destination {
+  id: string;
+  name: string;
+  country: string;
+  price: string;
+  image: string;
+  description: string;
+}
+
 interface Testimonial {
   id: number;
   name: string;
@@ -32,7 +45,46 @@ interface Testimonial {
   rating: number;
   comment: string;
 }
+
 export default function Home() {
+  // Featured destinations state
+  const [destinations, setDestinations] = useState<Destination[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [currentDestinationIndex, setCurrentDestinationIndex] = useState(0);
+
+  // fetching destinations from API
+  useEffect(() => {
+    axios
+      .get(
+        "https://67eadc5834bcedd95f64c9f3.mockapi.io/RebelRover/Destinations"
+      )
+      .then((response) => {
+        setDestinations(response.data);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching destinations:", error);
+        setIsLoading(false);
+      });
+  }, []);
+
+  // navigation for featured destinations
+  const nextDestination = () => {
+    if (destinations.length > 0) {
+      setCurrentDestinationIndex((prev) =>
+        prev >= destinations.length - 3 ? 0 : prev + 1
+      );
+    }
+  };
+
+  const prevDestination = () => {
+    if (destinations.length > 0) {
+      setCurrentDestinationIndex((prev) =>
+        prev <= 0 ? destinations.length - 3 : prev - 1
+      );
+    }
+  };
+
   // Testimonials data
   const testimonials: Testimonial[] = [
     {
@@ -94,7 +146,7 @@ export default function Home() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const maxIndex = testimonials.length - 3;
-
+  //navigation for testimonals section
   const nextSlide = () => {
     setCurrentIndex((prevIndex) => (prevIndex >= maxIndex ? 0 : prevIndex + 1));
   };
@@ -103,16 +155,16 @@ export default function Home() {
     setCurrentIndex((prevIndex) => (prevIndex <= 0 ? maxIndex : prevIndex - 1));
   };
   return (
-    <div>
+    <div className="overflow-hidden">
       {/* hero section */}
       <div
         className="bg-cover bg-center h-screen text-white"
         style={{ backgroundImage: `url(${suitcase})` }}
       >
         <Header />
-        <div className="pl-16">
-          <div className="flex flex-col pt-16  ">
-            <h1 className="text-[6vw] font-semibold mb-2 leading-[1.1] whitespace-pre-line pb-6">
+        <div className="lg:pl-16 md:pl-8 pl-4">
+          <div className="flex flex-col pt-24 pl-10 lg:pl-0 ">
+            <h1 className="text-[6vw]  font-semibold mb-2 leading-[1.1] whitespace-pre-line pb-6">
               Make in {"\n"}your journey
             </h1>
             <p className="opacity-60 leading-[1.1] whitespace-pre-line">
@@ -120,7 +172,7 @@ export default function Home() {
               beauty.
             </p>
           </div>
-          <div className="bg-white text-black w-[55%]  py-2   rounded-full  pl-6 pr-2 mt-8 ">
+          <div className="bg-white text-black  max-sm:w-[80%] max-lg:w-[60%]  lg:w-[55%]   py-2   rounded-full  pl-6 pr-2 mt-8 ">
             <ul className="flex flex-row justify-between items-center relative ">
               <li className="opacity-50 p-0">
                 <Link to="#">Location</Link>
@@ -149,56 +201,166 @@ export default function Home() {
             {"\n"}exotic natural scenery
           </h1>
 
-          <p className="opacity-70 pt-4">
+          <p className="opacity-70 pt-4 text-center">
             Explore the world with what you love beautiful natural beauty.
           </p>
         </div>
+        <div className="relative max-w-6xl mx-auto px-4">
+          {/* Left arrow */}
+          <button
+            onClick={prevDestination}
+            className="absolute left-1 top-1 -translate-y-1/2 z-10 w-12 h-12 bg-white text-black opacity-50 p-3 rounded-md shadow-lg hover:bg-gray-100 transition-colors shadow-md"
+            aria-label="Previous slide"
+            disabled={isLoading}
+          >
+            <ChevronLeft className="h-6 w-6" />
+          </button>
 
-        <div className="flex bg-white mx-8 gap-4">
-          <div className="">
-            <img
-              src={happytravelimage}
-              className="shadow-xl"
-              width={400}
-              height={0}
-              alt=""
-            />
-          </div>
-          <div className="shadow-xl rounded-2xl">
-            <img src={oceanimage} alt="" width={500} height={0} />
-            <div className="pl-3 pt-6 pb-4">
-              <h1 className="font-bold text-[20px]">Bali, Indonesia.</h1>
-              <p className="opacity-70 leading-[1.6] whitespace-pre-line">
-                Bali is a beautiful tourist spot and is visited by many
-                travelers.
-              </p>
+          {isLoading ? (
+            <div className="flex justify-center items-center h-[300px]">
+              <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-black"></div>
             </div>
-          </div>
-          <div>
-            <img
-              className="shadow-xl"
-              src={statueoflibertyimage}
-              alt=""
-              width={400}
-              height={0}
-            />
-          </div>
+          ) : destinations.length > 0 ? (
+            <div className="flex gap-4 mx-8">
+              {/* First destination */}
+              <div className="w-[30%] hidden md:block">
+                <img
+                  src={
+                    destinations[currentDestinationIndex % destinations.length]
+                      ?.image || happytravelimage
+                  }
+                  className="w-full h-[300px] object-cover rounded-lg shadow-xl"
+                  alt={
+                    destinations[currentDestinationIndex % destinations.length]
+                      ?.name || "Destination"
+                  }
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.src = happytravelimage;
+                  }}
+                />
+              </div>
+
+              {/* middle destination-always visible */}
+              <div className="w-full md:w-[40%] relative">
+                <img
+                  src={
+                    destinations[
+                      (currentDestinationIndex + 1) % destinations.length
+                    ]?.image || oceanimage
+                  }
+                  className="w-full h-[300px] object-cover rounded-lg shadow-xl"
+                  alt={
+                    destinations[
+                      (currentDestinationIndex + 1) % destinations.length
+                    ]?.name || "Bali, Indonesia"
+                  }
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.src = oceanimage;
+                  }}
+                />
+                <div className="p-4 bg-white rounded-b-lg shadow-xl">
+                  <h3 className="font-bold text-[20px]">
+                    {destinations[
+                      (currentDestinationIndex + 1) % destinations.length
+                    ]?.country || "Bali, Indonesia"}
+                  </h3>
+                  <p className="opacity-70 leading-[1.6] whitespace-pre-line">
+                    {destinations[
+                      (currentDestinationIndex + 1) % destinations.length
+                    ]?.description ||
+                      "Bali is a beautiful tourist spot and is visited by many travelers."}
+                  </p>
+                </div>
+              </div>
+
+              {/* third destination */}
+              <div className="w-[33%] hidden md:block">
+                <img
+                  src={
+                    destinations[
+                      (currentDestinationIndex + 2) % destinations.length
+                    ]?.image || statueoflibertyimage
+                  }
+                  className="w-full h-[300px] object-cover rounded-lg shadow-xl"
+                  alt={
+                    destinations[
+                      (currentDestinationIndex + 2) % destinations.length
+                    ]?.name || "Destination"
+                  }
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.src = statueoflibertyimage;
+                  }}
+                />
+              </div>
+            </div>
+          ) : (
+            // Fallback to original images if API returns no data
+            <div className="flex gap-4 mx-8">
+              <div className="hidden md:block">
+                <img
+                  src={happytravelimage || "/placeholder.svg"}
+                  className="w-full h-[300px] rounded-lg shadow-xl"
+                  alt="Happy travelers"
+                  width={400}
+                  height={0}
+                />
+              </div>
+              <div className="w-full md:w-[40%]">
+                <img
+                  src={oceanimage || "/placeholder.svg"}
+                  className="w-full h-[300px] rounded-lg shadow-xl"
+                  alt="Bali, Indonesia"
+                  width={400}
+                  height={0}
+                />
+                <div className="bg-white p-4 rounded-b-lg shadow-xl">
+                  <h3 className="font-bold text-[20px]">Bali, Indonesia.</h3>
+                  <p className="opacity-70 leading-[1.6] whitespace-pre-line">
+                    Bali is a beautiful tourist spot and is visited by many
+                    travelers.
+                  </p>
+                </div>
+              </div>
+              <div className="hidden md:block">
+                <img
+                  src={statueoflibertyimage || "/placeholder.svg"}
+                  className="w-full h-[300px] object-cover rounded-lg shadow-xl"
+                  alt="Statue of Liberty"
+                  width={400}
+                  height={0}
+                />
+              </div>
+            </div>
+          )}
+
+          {/* Right arrow */}
+          <button
+            onClick={nextDestination}
+            className="absolute right-2 top-1 -translate-y-1/2 z-10 bg-transparent w-12 h-12 bg-white text-black opacity-50 p-3 rounded-md shadow-lg hover:bg-gray-100 transition-colors shadow-md"
+            aria-label="Next slide"
+            disabled={isLoading}
+          >
+            <ChevronRight className="h-6 w-6" />
+          </button>
         </div>
       </div>
 
       {/* Why chose us section */}
       <div
-        className=" container3 h-screen bg-cover bg-center bg-no-repeat relative "
+        className=" container3 bg-cover bg-center bg-no-repeat relative md:h-screen "
         style={{ backgroundImage: `url(${whychooseusbg})` }}
       >
         <div className="flex flex-col items-center justify-center pt-16 pb-36 text-white">
           <h1 className="text-[5vw] font-semibold">Why choose us?</h1>
           <p>our services have been trusted by world travelers.</p>
         </div>
-        <div className="cardcontainer absolute flex flex-row gap-16 justify-center items-center mx-32">
-          <div className="bg-white w-[33.3%] px-4 pt-10 pb-14 rounded-lg shadow-xl">
+        <div className="cardcontainer  md:absolute flex flex-col sm:flex-col md:flex-row gap-8 lg:gap-16 justify-center items-center mx-10 lg:mx-32">
+          <div className="bg-white w-[80%] md:w-[33.3%] px-4 pt-10 pb-14 rounded-lg shadow-xl">
             <img
-              src={servicelogo}
+              src={servicelogo || "/placeholder.svg"}
               alt=""
               width={60}
               height={0}
@@ -212,9 +374,9 @@ export default function Home() {
               Learn more <FaLongArrowAltRight className="translate-y-[1px]" />
             </p>
           </div>
-          <div className="bg-white px-4 pt-10 pb-14 w-[33%] rounded-lg shadow-xl">
+          <div className="bg-white w-[80%] md:w-[33.3%] px-4 pt-10 pb-14 rounded-lg shadow-xl">
             <img
-              src={guaranteeLogo}
+              src={guaranteeLogo || "/placeholder.svg"}
               alt=""
               width={60}
               height={0}
@@ -229,9 +391,9 @@ export default function Home() {
               <FaLongArrowAltRight className="translate-y-[1px]" />
             </p>
           </div>
-          <div className="bg-white w-[33%] px-4 pt-10 pb-14 rounded-lg shadow-xl">
+          <div className="bg-white w-[80%] md:w-[33.3%] px-4 pt-10 pb-14 rounded-lg shadow-xl">
             <img
-              src={handipickedlogo}
+              src={handipickedlogo || "/placeholder.svg"}
               alt=""
               width={60}
               height={0}
@@ -250,28 +412,53 @@ export default function Home() {
       </div>
       {/* partners section */}
       <div className="container4 mt-36 items-center justify-center flex flex-col">
-        <div className="flex flex-col">
+        <div className="flex flex-col items-center">
           <h1 className="font-semibold text-[4.5vw] pb-2">Our tour partner</h1>
           <p className="opacity-50 leading-[1.6] whitespace-pre-line text-center">
             There are many variation of passage of lorem ipsum available but
             {"\n"} the majority have suffered alteration
           </p>
         </div>
-        <div className="flex flex-row gap-16 items-center justify-center pt-10 pb-24">
+        <div className="flex flex-row gap-16 items-center justify-center pt-10 pb-24 mx-4">
           <Link to="#">
-            <img src={katana} alt="" width={100} height={0} />
+            <img
+              src={katana || "/placeholder.svg"}
+              alt=""
+              width={100}
+              height={0}
+            />
           </Link>
           <Link to="#">
-            <img src={travava} alt="" width={100} height={0} />
+            <img
+              src={travava || "/placeholder.svg"}
+              alt=""
+              width={100}
+              height={0}
+            />
           </Link>
           <Link to="#">
-            <img src={bigui} alt="" width={100} height={0} />
+            <img
+              src={bigui || "/placeholder.svg"}
+              alt=""
+              width={100}
+              height={0}
+            />
           </Link>
           <Link to="#">
-            <img src={booking} alt="" width={100} height={0} />
+            <img
+              src={booking || "/placeholder.svg"}
+              alt=""
+              width={100}
+              height={0}
+            />
           </Link>
           <Link to="#">
-            <img src={jakmaen} alt="" width={100} height={0} />
+            <img
+              src={jakmaen || "/placeholder.svg"}
+              alt=""
+              width={100}
+              height={0}
+            />
           </Link>
         </div>
       </div>
@@ -310,7 +497,7 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Testimonials Slider with Overflow */}
+          {/* Testimonials Slider  */}
           <div className="relative overflow-hidden">
             <div
               className="flex transition-transform duration-500 ease-in-out"
@@ -319,8 +506,8 @@ export default function Home() {
               {testimonials.map((testimonial) => (
                 <div
                   key={testimonial.id}
-                  className="min-w-[30%] px-4 flex-shrink-0"
-                  style={{ width: "calc(100% / 4)" }} // Makes room to show part of the 4th card
+                  className="  max-sm:min-w-[100%] sm:min-w-[50%] md:min-w-[50%] lg:min-w-[33%] px-4 flex-shrink-0"
+                  style={{ width: "calc(100% / 3)" }}
                 >
                   <div className="bg-white p-10 mb-20 rounded-lg shadow-xl">
                     <div className="flex flex-col items-center mb-4">
