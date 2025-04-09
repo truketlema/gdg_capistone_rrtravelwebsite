@@ -3,20 +3,19 @@
 @tailwind utilities;
 
 body {
-    font-family: 'Poppins';
-    line-height: 70px;
-    width: 100%;
+  font-family: "Poppins";
+  width: 100%;
 }
 
 button {
-    border-radius: 30px;
-    background-color: #000;
-    color: #FFF;
-    padding: 19px 26px;
-    font-size: 22px;
-    font-weight: 600;
-    line-height: 100%;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+  border-radius: 30px;
+  background-color: #000;
+  color: #fff;
+  padding: 19px 26px;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
