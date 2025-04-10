@@ -1,5 +1,3 @@
-"use client";
-
 import suitcase from "../assets/suitcaseimage.png";
 import Header from "../Components/Header";
 import { Link } from "react-router-dom";
@@ -221,28 +219,20 @@ export default function Home() {
               <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-black"></div>
             </div>
           ) : destinations.length > 0 ? (
-            <div className="flex gap-4 mx-8">
+            <div className="flex gap-14 mx-8">
               {/* First destination */}
-              <div className="w-[30%] hidden md:block">
+              <div className="hidden md:block w-full md:w-[50%] lg:w-[40%] relative">
                 <img
-                  src={
-                    destinations[currentDestinationIndex % destinations.length]
-                      ?.image || happytravelimage
-                  }
-                  className="w-full h-[300px] object-cover rounded-lg shadow-xl"
-                  alt={
-                    destinations[currentDestinationIndex % destinations.length]
-                      ?.name || "Destination"
-                  }
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.src = happytravelimage;
-                  }}
+                  src={happytravelimage || "/placeholder.svg"}
+                  className="w-full h-[300px] rounded-lg shadow-xl"
+                  alt="Happy travelers"
+                  width={400}
+                  height={0}
                 />
               </div>
 
               {/* middle destination-always visible */}
-              <div className="w-full md:w-[40%] relative">
+              <div className="w-full md:w-[50%] lg:w-[40%] relative ">
                 <img
                   src={
                     destinations[
@@ -276,55 +266,7 @@ export default function Home() {
               </div>
 
               {/* third destination */}
-              <div className="w-[33%] hidden md:block">
-                <img
-                  src={
-                    destinations[
-                      (currentDestinationIndex + 2) % destinations.length
-                    ]?.image || statueoflibertyimage
-                  }
-                  className="w-full h-[300px] object-cover rounded-lg shadow-xl"
-                  alt={
-                    destinations[
-                      (currentDestinationIndex + 2) % destinations.length
-                    ]?.name || "Destination"
-                  }
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.src = statueoflibertyimage;
-                  }}
-                />
-              </div>
-            </div>
-          ) : (
-            // Fallback to original images if API returns no data
-            <div className="flex gap-4 mx-8">
-              <div className="hidden md:block">
-                <img
-                  src={happytravelimage || "/placeholder.svg"}
-                  className="w-full h-[300px] rounded-lg shadow-xl"
-                  alt="Happy travelers"
-                  width={400}
-                  height={0}
-                />
-              </div>
-              <div className="w-full md:w-[40%]">
-                <img
-                  src={oceanimage || "/placeholder.svg"}
-                  className="w-full h-[300px] rounded-lg shadow-xl"
-                  alt="Bali, Indonesia"
-                  width={400}
-                  height={0}
-                />
-                <div className="bg-white p-4 rounded-b-lg shadow-xl">
-                  <h3 className="font-bold text-[20px]">Bali, Indonesia.</h3>
-                  <p className="opacity-70 leading-[1.6] whitespace-pre-line">
-                    Bali is a beautiful tourist spot and is visited by many
-                    travelers.
-                  </p>
-                </div>
-              </div>
-              <div className="hidden md:block">
+              <div className="hidden lg:block w-full md:w-[40%] relative">
                 <img
                   src={statueoflibertyimage || "/placeholder.svg"}
                   className="w-full h-[300px] object-cover rounded-lg shadow-xl"
@@ -334,6 +276,9 @@ export default function Home() {
                 />
               </div>
             </div>
+          ) : (
+            // Fallback to original images if API returns no data
+            <div className="flex gap-4 mx-8"></div>
           )}
 
           {/* Right arrow */}
