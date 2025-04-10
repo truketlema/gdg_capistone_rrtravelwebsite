@@ -20,8 +20,12 @@ export default function Header() {
           className="hidden md:flex items-center gap-6 sm:gap-8 md:gap-4 lg:gap-8 xl:gap-10 
           text-[16px] md:text-[14px] lg:text-[18px] xl:text-[18px] transition-all duration-200"
         >
-          <li className="md:pr-5 lg:pr-36 flex items-center md:ml-4 lg:ml-8">
+          <li className="flex items-center">
             <Link to="/">Home</Link>
+          </li>
+
+          <li className="flex items-center">
+            <Link to="/about_us">About Us</Link>
           </li>
 
           <li className="relative flex items-center gap-1">
@@ -107,6 +111,11 @@ export default function Header() {
           <li>
             <Link to="/" onClick={() => setMenuOpen(false)}>
               Home
+            </Link>
+          </li>
+          <li>
+            <Link to="/about_us" onClick={() => setMenuOpen(false)}>
+              About Us
             </Link>
           </li>
           <li>

@@ -3,8 +3,8 @@ import image from "../assets/package-image.png";
 import { Article } from "../Components/Article";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Header from "../Components/Header";
 import Footer from "../Components/Footer";
+import banner from "../assets/banner-package-image.png";
 
 interface Destination {
   id: string;
@@ -45,7 +45,7 @@ export const Packages = () => {
   });
   return (
     <div>
-      <Banner />
+      <Banner page="Travel Packages" breadcrumb="Package" image={banner} />
       <div className="my-[178px] mx-4 sm:my-16 sm:mx-8">
         <h2 className="text-3xl sm:text-5xl font-semibold">
           Popular Destination
@@ -79,8 +79,11 @@ export const Packages = () => {
             <span className="hidden sm:inline">Explore now</span>
           </button>
         </div>
+        {
+          filteredDestinations.length > 0 ?
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredDestinations
+          {
+          filteredDestinations
             .slice(0, isCollapsed ? 6 : filteredDestinations.length)
             .map((destination) => (
               <div
@@ -113,8 +116,13 @@ export const Packages = () => {
                   </div>
                 </div>
               </div>
-            ))}
-        </div>
+            ))
+            }
+        </div>: 
+                <p className="mb-[120px] text-xl font-semibold text-gray-500 mt-[120px] items-center text-center">
+                  No destinations in sight!
+                </p>
+}
       </div>
       <Article />
       <Footer />
