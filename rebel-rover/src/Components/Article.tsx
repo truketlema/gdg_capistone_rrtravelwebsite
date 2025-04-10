@@ -1,11 +1,21 @@
 import image from '../assets/airplane-image.png';
 import family from '../assets/family-image.png';
+import { useEffect } from 'react';
 
 export const Article = () => {
+  useEffect(() => {
+    if (window.location.hash) {
+      const element = document.querySelector(window.location.hash);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }, []);
+
   return (
     <div className='mb-[178px]'>
       <img src={image} alt="Airplane" className="w-full h-auto mb-[178px]" />
-      <div className='mx-4 sm:mx-16'>
+      <div id="tips" className='mx-4 sm:mx-16'>
         <h2 className="text-2xl sm:text-4xl font-semibold">Tips & Article</h2>
         <div className="flex flex-col sm:flex-row justify-between items-center pt-10 pb-16">
           <p className="leading-6 sm:leading-8 text-faded-color text-base sm:text-lg w-full sm:w-1/2 mb-4 sm:mb-0">

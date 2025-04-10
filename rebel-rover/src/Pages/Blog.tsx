@@ -5,27 +5,61 @@ import post1 from "../assets/post1.png";
 import post2 from "../assets/post2.png";
 import post3 from "../assets/post3.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
-import Header from "../Components/Header";
+import {faFolder, faUser,faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
+import {FaPhone, FaTwitter, FaLinkedin} from "react-icons/fa6";
+import {MdFacebook, MdEmail } from "react-icons/md";
 import Footer from "../Components/Footer";
+import Header from "../Components/Header";
+import {useState} from 'react';
+
 export const Blog = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    website: '',
+    comment: ''
+  });
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmitComment = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log('Comment submitted:', formData);
+    alert('Thank you for your comment!');
+    setFormData({ name: '', email: '', website: '', comment: '' });
+  };
   return (
     <div className="w-full">
       {/* Image */}
       <div className="relative">
-        <div className="absolute top-0 left-0 w-full z-10">
-          <Header />
-        </div>
+          <div className="absolute top-0 left-0 w-full z-10">
+                <Header />
+              </div>
         <img
           className="w-full h-auto object-cover mx-auto"
           src={blogintro}
           alt="Contact"
         />
-        <div className="absolute top-[70%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white">
+        <div className="absolute top-[50%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white">
           <h1 className="text-4xl font-bold">
             Travel Stories for now and the future
           </h1>
-          <p className="text-sm mt-2">Home &gt; Contact</p>
+          <div className="flex flex-wrap justify-center gap-6 text-lg">
+            <div className="flex items-center justify-center gap-2">
+              <FontAwesomeIcon icon={faUser} className="text-xl" />
+              <span>Hasmar</span>
+            </div>
+            <div className="flex items-center justify-center gap-2">
+              <FontAwesomeIcon icon={faCalendarAlt} className="text-xl" />
+              <span>January 18, 2025</span>
+            </div>
+            <div className="flex items-center justify-center gap-2">
+              <FontAwesomeIcon icon={faFolder} className="text-xl" />
+              <span>Stories, Tips</span>
+            </div>
+          </div>
         </div>
       </div>
       <div className="[height:138px]"></div>
@@ -92,14 +126,17 @@ export const Blog = () => {
               </div>
               <div className="flex space-x-3">
                 <p>Share this: </p>
-                <a href="#" className="text-gray-700">
-                  <i className="fab fa-facebook-f"></i>
+                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"
+                  className="hover:text-blue-500 transition-colors duration-300">
+                  <MdFacebook />
                 </a>
-                <a href="#" className="text-gray-700">
-                  <i className="fab fa-twitter"></i>
+                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer"
+                  className="hover:text-blue-500 transition-colors duration-300">
+                  <FaTwitter />
                 </a>
-                <a href="#" className="text-gray-700">
-                  <i className="fab fa-linkedin-in"></i>
+                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer"
+                  className="hover:text-blue-500 transition-colors duration-300">
+                  <FaLinkedin />
                 </a>
               </div>
             </div>
@@ -111,33 +148,30 @@ export const Blog = () => {
                 Your email address will not be published. Required fields are
                 marked *
               </p>
-              <form>
+              <form onSubmit={handleSubmitComment}>
                 {/* Comment Field */}
                 <div className="mb-4">
-                  <label
-                    htmlFor="comment"
-                    className="block text-sm font-medium mb-2"
-                  >
-                    Comment
-                  </label>
+                  <label htmlFor="comment" className="block text-sm font-medium mb-2">Comment</label>
                   <textarea
                     id="comment"
+                    name="comment"
+                    value={formData.comment}
+                    onChange={handleChange}
                     className="w-full p-2 border border-gray-300 rounded"
                     rows={4}
+                    required
                   ></textarea>
                 </div>
 
                 {/* Name Field */}
                 <div className="mb-4">
-                  <label
-                    htmlFor="name"
-                    className="block text-sm font-medium mb-2"
-                  >
-                    Name *
-                  </label>
+                  <label htmlFor="name" className="block text-sm font-medium mb-2">Name *</label>
                   <input
                     type="text"
                     id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
                     className="w-full p-2 border border-gray-300 rounded"
                     required
                   />
@@ -145,15 +179,13 @@ export const Blog = () => {
 
                 {/* Email Field */}
                 <div className="mb-4">
-                  <label
-                    htmlFor="email"
-                    className="block text-sm font-medium mb-2"
-                  >
-                    Email *
-                  </label>
+                  <label htmlFor="email" className="block text-sm font-medium mb-2">Email *</label>
                   <input
                     type="email"
                     id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
                     className="w-full p-2 border border-gray-300 rounded"
                     required
                   />
@@ -161,15 +193,13 @@ export const Blog = () => {
 
                 {/* Website Field */}
                 <div className="mb-4">
-                  <label
-                    htmlFor="website"
-                    className="block text-sm font-medium mb-2"
-                  >
-                    Website
-                  </label>
+                  <label htmlFor="website" className="block text-sm font-medium mb-2">Website</label>
                   <input
                     type="url"
                     id="website"
+                    name="website"
+                    value={formData.website}
+                    onChange={handleChange}
                     className="w-full p-2 border border-gray-300 rounded"
                   />
                 </div>
@@ -178,15 +208,14 @@ export const Blog = () => {
                 <div className="mb-4">
                   <label className="inline-flex items-center">
                     <input type="checkbox" className="form-checkbox" />
-                    <span className="ml-2 text-sm">
-                      Save my name, email, and website for the next time I
-                      comment.
-                    </span>
+                    <span className="ml-2 text-sm">Save my name, email, and website for next time I comment.</span>
                   </label>
                 </div>
-
                 {/* Post Comment Button */}
-                <button type="submit" className="button">
+                <button
+                  type="submit"
+                  className="button"
+                >
                   Post Comment
                 </button>
               </form>
@@ -237,15 +266,20 @@ export const Blog = () => {
           <div className="bg-white shadow-md rounded-xl p-4">
             <h3 className="text-lg font-semibold mb-2">Categories</h3>
             <ul className="text-sm text-gray-700 divide-y divide-gray-200">
-              {["Travel", "Tips", "Stories", "Destination"].map(
-                (item, index) => (
-                  <li key={index} className="py-1">
+              {["Travel", "Tips", "Stories", "Destination"].map((item, index) => (
+                <li
+                  key={index}
+                  className="py-1 cursor-pointer hover:text-white hover:bg-black transition-colors duration-300"
+                >
+                  <a href={"/packages#tips"} className="block">
                     → {item}
-                  </li>
-                )
-              )}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
+
+
 
           {/* Contact Box */}
           <div className="bg-black text-white shadow-md rounded-xl p-4 space-y-2">
@@ -264,7 +298,7 @@ export const Blog = () => {
                 }}
                 title="Click to call and copy"
               >
-                <FontAwesomeIcon icon={faPhone} />
+                <FaPhone />
                 <span>+62 6943 6966</span>
               </div>
 
@@ -277,14 +311,15 @@ export const Blog = () => {
                 }}
                 title="Click to email and copy"
               >
-                <FontAwesomeIcon icon={faEnvelope} />
+                <MdEmail />
                 <span>contact@domain.com</span>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <Footer />
+      {/* Footer section */}
+            <Footer />
     </div>
   );
 };
