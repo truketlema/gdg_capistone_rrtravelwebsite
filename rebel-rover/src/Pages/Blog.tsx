@@ -6,12 +6,16 @@ import post2 from "../assets/post2.png";
 import post3 from "../assets/post3.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
-
+import Header from "../Components/Header";
+import Footer from "../Components/Footer";
 export const Blog = () => {
   return (
     <div className="w-full">
       {/* Image */}
       <div className="relative">
+        <div className="absolute top-0 left-0 w-full z-10">
+          <Header />
+        </div>
         <img
           className="w-full h-auto object-cover mx-auto"
           src={blogintro}
@@ -280,6 +284,7 @@ export const Blog = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

@@ -4,6 +4,7 @@ import { Article } from "../Components/Article";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Header from "../Components/Header";
+import Footer from "../Components/Footer";
 
 interface Destination {
   id: string;
@@ -116,6 +117,7 @@ export const Packages = () => {
         </div>
       </div>
       <Article />
+      <Footer />
     </div>
   );
 };
