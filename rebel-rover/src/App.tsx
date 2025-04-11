@@ -6,9 +6,9 @@ import Home from "./Pages/Home";
 import { NotFound } from "./Pages/NotFound";
 import { Profile } from "./Pages/Profile";
 import { Packages } from "./Pages/Packages";
-import { SignUp } from "./Pages/SignUp";
 import "./App.css";
-import Header from "./Components/Header";
+import { Signup } from "./Pages/SignUp";
+import { Login } from "./Pages/login";
 
 function App() {
   return (
@@ -20,7 +20,10 @@ function App() {
         <Route path="/contact" Component={Contact} />
         <Route path="/blog/:id" Component={Blog} />
         <Route path="/profile/:username" Component={Profile} />
+        <Route path="/SignUp" Component={Signup}></Route>
         <Route Component={NotFound} />
+        <Route path="/login" Component={Login}></Route>
+        <Route path="/profile" Component={Profile}></Route>
       </Routes>
     </div>
   );

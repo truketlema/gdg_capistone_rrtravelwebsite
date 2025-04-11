@@ -25,7 +25,7 @@ import testifier5 from "../assets/testifier5.jpg";
 import testifier6 from "../assets/testifier6.jpg";
 import Footer from "../Components/Footer";
 import axios from "axios";
-
+import { useNavigate } from "react-router-dom";
 interface Destination {
   id: string;
   name: string;
@@ -45,6 +45,16 @@ interface Testimonial {
 }
 
 export default function Home() {
+  const navigate = useNavigate();
+
+  const User = () => {
+    const user = localStorage.getItem("loggedInUser");
+    if (user) {
+      navigate("/profile");
+    } else {
+      navigate("/signup");
+    }
+  };
   // Featured destinations state
   const [destinations, setDestinations] = useState<Destination[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -181,9 +191,14 @@ export default function Home() {
               <li className="opacity-50 p-0">
                 <Link to="#">People</Link>
               </li>
-              <button className="bg-black text-white py-4 rounded-full text-[14px]">
-                Explore now
-              </button>
+              <Link to="/signup">
+                <button
+                  onClick={User}
+                  className="bg-black text-white py-4 rounded-full text-[14px]"
+                >
+                  Explore now
+                </button>
+              </Link>
             </ul>
           </div>
           <p className="opacity-70 pt-6">

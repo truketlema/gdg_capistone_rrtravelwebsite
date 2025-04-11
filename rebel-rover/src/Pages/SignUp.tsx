@@ -7,18 +7,29 @@ export const Signup = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [agree, setAgree] = useState(true);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError("");
+    setLoading(true);
 
+    // Basic email format validation
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
     if (!email || !password || !phoneNumber) {
       setError("All fields are required!");
+      setLoading(false);
       return;
     }
 
+    if (!emailPattern.test(email)) {
+      setError("Please enter a valid email address.");
+      setLoading(false);
+      return;
+    }
+
+    // Check if email already exists
     const existingUsers = JSON.parse(localStorage.getItem("users") || "[]");
     const userExists = existingUsers.find(
       (user: { email: string }) => user.email === email
@@ -26,15 +37,44 @@ export const Signup = () => {
 
     if (userExists) {
       setError("User already exists!");
+      setLoading(false);
       return;
     }
 
+    // Proceed to register the new user
     const newUser = { email, password, phoneNumber };
-    existingUsers.push(newUser);
-    localStorage.setItem("users", JSON.stringify(existingUsers));
 
-    alert("User registered successfully!");
-    navigate("/login");
+    try {
+      // Simulate saving the new user to your mock API
+      const response = await fetch(
+        "https://67eadc5834bcedd95f64c9f3.mockapi.io/RebelRover/Destinations",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newUser),
+        }
+      );
+
+      const data = await response.json();
+
+      if (response.ok) {
+        existingUsers.push(data); // Adding the new user to the local storage
+        localStorage.setItem("users", JSON.stringify(existingUsers));
+
+        localStorage.setItem("loggedInUser", JSON.stringify(data));
+        alert("User registered successfully!");
+        navigate("/login");
+      } else {
+        setError(data.message || "Something went wrong, please try again.");
+      }
+    } catch (err) {
+      console.error(err);
+      setError("Error connecting to the server. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -95,8 +135,9 @@ export const Signup = () => {
           <button
             type="submit"
             className="w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700 text-sm transition"
+            disabled={loading}
           >
-            Sign Up
+            {loading ? "Signing up..." : "Sign Up"}
           </button>
         </form>
 
@@ -130,7 +171,7 @@ export const Signup = () => {
             Already have an account?{" "}
             <button
               onClick={() => navigate("/login")}
-              className="text-green-600 font-medium hover:underline text-xs"
+              className="text-green-600 font-medium hover:underline text-xs bg-transparent"
             >
               Log in
             </button>

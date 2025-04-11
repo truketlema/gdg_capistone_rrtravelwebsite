@@ -30,9 +30,9 @@ export const Login = () => {
       setError("Incorrect password!");
       return;
     }
-
+    localStorage.setItem("loggedInUser", JSON.stringify(user));
     alert("Login successful!");
-    navigate("/");
+    navigate("/profile");
   };
 
   return (
@@ -93,7 +93,7 @@ export const Login = () => {
           <span className="text-gray-600 text-sm">Don't have an account?</span>{" "}
           <button
             onClick={() => navigate("/SignUp")}
-            className="text-green-600 font-medium text-sm hover:underline"
+            className="text-green-600 font-medium text-sm hover:underline bg-transparent"
           >
             Sign up
           </button>

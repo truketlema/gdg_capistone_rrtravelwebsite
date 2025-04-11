@@ -6,6 +6,16 @@ import axios from "axios";
 import Footer from "../Components/Footer";
 import banner from "../assets/banner-package-image.png";
 
+interface Booking {
+  userEmail: string;
+  destinationId: string;
+  destinationName: string;
+  country: string;
+  price: string;
+  image: string;
+  status: string;
+}
+
 interface Destination {
   id: string;
   name: string;
@@ -79,50 +89,99 @@ export const Packages = () => {
             <span className="hidden sm:inline">Explore now</span>
           </button>
         </div>
-        {
-          filteredDestinations.length > 0 ?
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {
-          filteredDestinations
-            .slice(0, isCollapsed ? 6 : filteredDestinations.length)
-            .map((destination) => (
-              <div
-                className="rounded-lg overflow-hidden shadow-lg flex flex-col"
-                key={destination.id}
-              >
-                <img src={image} className="w-full h-auto" />
-                <div className="mx-4 mb-4 flex-grow flex flex-col">
-                  <div className="flex justify-between items-center pt-4 pb-2">
-                    <h3 className="text-lg sm:text-xl font-semibold leading-tight">
-                      {destination.country}
-                    </h3>
-                    <p className="text-lg sm:text-xl font-normal">
-                      ${destination.price}
-                      <span className="font-light">/2days</span>
-                    </p>
-                  </div>
-                  <p className="leading-6 text-package-description text-base sm:text-lg flex-grow">
-                    {destination.description}
-                  </p>
-                  <div className="flex justify-between items-center pt-4 pb-2">
-                    <div>
-                      <i className="fa-solid fa-star text-star-color"></i>
-                      <i className="fa-solid fa-star text-star-color"></i>
-                      <i className="fa-solid fa-star text-star-color"></i>
-                      <i className="fa-solid fa-star text-star-color"></i>
-                      <i className="fa-solid fa-star text-star-color"></i>
+        {filteredDestinations.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredDestinations
+              .slice(0, isCollapsed ? 6 : filteredDestinations.length)
+              .map((destination) => (
+                <div
+                  className="rounded-lg overflow-hidden shadow-lg flex flex-col"
+                  key={destination.id}
+                >
+                  <img src={image} className="w-full h-auto" />
+                  <div className="mx-4 mb-4 flex-grow flex flex-col">
+                    <div className="flex justify-between items-center pt-4 pb-2">
+                      <h3 className="text-lg sm:text-xl font-semibold leading-tight">
+                        {destination.country}
+                      </h3>
+                      <p className="text-lg sm:text-xl font-normal">
+                        ${destination.price}
+                        <span className="font-light">/2days</span>
+                      </p>
                     </div>
-                    <button className="text-sm sm:text-lg">Booking now</button>
+                    <p className="leading-6 text-package-description text-base sm:text-lg flex-grow">
+                      {destination.description}
+                    </p>
+                    <div className="flex justify-between items-center pt-4 pb-2">
+                      <div>
+                        <i className="fa-solid fa-star text-star-color"></i>
+                        <i className="fa-solid fa-star text-star-color"></i>
+                        <i className="fa-solid fa-star text-star-color"></i>
+                        <i className="fa-solid fa-star text-star-color"></i>
+                        <i className="fa-solid fa-star text-star-color"></i>
+                      </div>
+                      <button
+                        className="text-sm sm:text-lg text-green-600 hover:underline"
+                        onClick={() => {
+                          const loggedInUser = JSON.parse(
+                            localStorage.getItem("loggedInUser") || "null"
+                          );
+
+                          if (!loggedInUser) {
+                            alert("Please login to book a package.");
+                            return;
+                          }
+
+                          const existingBookings: Booking[] = JSON.parse(
+                            localStorage.getItem("bookings") || "[]"
+                          );
+
+                          console.log(
+                            "Existing bookings before adding new:",
+                            existingBookings
+                          );
+
+                          const newBooking: Booking = {
+                            userEmail: loggedInUser.email,
+                            destinationId: destination.id,
+                            destinationName: destination.name,
+                            country: destination.country,
+                            price: destination.price,
+                            image: destination.image || image,
+                            status: "Pending", // Adding status field
+                          };
+
+                          const updatedBookings = [
+                            ...existingBookings,
+                            newBooking,
+                          ];
+                          console.log("New bookings array:", updatedBookings);
+
+                          // Saving to localStorage
+                          localStorage.setItem(
+                            "bookings",
+                            JSON.stringify(updatedBookings)
+                          );
+                          console.log(
+                            "Saved bookings to localStorage:",
+                            updatedBookings
+                          );
+
+                          alert("Package booked successfully!");
+                        }}
+                      >
+                        Book now
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))
-            }
-        </div>: 
-                <p className="mb-[120px] text-xl font-semibold text-gray-500 mt-[120px] items-center text-center">
-                  No destinations in sight!
-                </p>
-}
+              ))}
+          </div>
+        ) : (
+          <p className="mb-[120px] text-xl font-semibold text-gray-500 mt-[120px] items-center text-center">
+            No destinations in sight!
+          </p>
+        )}
       </div>
       <Article />
       <Footer />

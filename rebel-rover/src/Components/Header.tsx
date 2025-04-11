@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo1 1.png";
 import { RiArrowDropDownLine } from "react-icons/ri";
@@ -6,6 +6,12 @@ import { FaSearch, FaBars, FaTimes } from "react-icons/fa";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const user = localStorage.getItem("loggedInUser");
+    setIsLoggedIn(!!user); // convert to boolean
+  }, []);
 
   return (
     <header className="bg-[rgba(10,28,108,0.7)] text-white px-6 py-4">
@@ -94,6 +100,18 @@ export default function Header() {
               <FaSearch className="text-lg" />
             </Link>
           </li>
+
+          {/* Profile button shown only when logged in */}
+          {isLoggedIn && (
+            <li>
+              <Link
+                to="/profile"
+                className="bg-white text-blue-900 font-medium px-4 py-1.5 rounded-full hover:bg-blue-100 transition"
+              >
+                Profile
+              </Link>
+            </li>
+          )}
         </ul>
 
         {/* Mobile Toggle */}
@@ -143,6 +161,15 @@ export default function Header() {
               <FaSearch className="inline-block mr-1" /> Search
             </Link>
           </li>
+
+          {/* Mobile Profile button */}
+          {isLoggedIn && (
+            <li>
+              <Link to="/profile" onClick={() => setMenuOpen(false)}>
+                Profile
+              </Link>
+            </li>
+          )}
         </ul>
       )}
     </header>
