@@ -139,11 +139,10 @@ export const Profile = () => {
         <div className="max-w-5xl mx-auto">
           <div className="bg-white rounded-lg shadow-md overflow-hidden mb-8">
             <div className="relative">
-              {/* Here, instead of the gradient, we are now using an image as the background */}
               <div
                 className="h-32 bg-cover bg-center"
                 style={{
-                  backgroundImage: `url(${travelimage})`, // Make sure it's in the 'public/assets' directory
+                  backgroundImage: `url(${travelimage})`,
                 }}
               />
 
