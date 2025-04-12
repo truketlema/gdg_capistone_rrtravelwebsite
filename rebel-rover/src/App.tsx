@@ -21,9 +21,9 @@ function App() {
         <Route path="/blog/:id" Component={Blog} />
         <Route path="/profile/:username" Component={Profile} />
         <Route path="/SignUp" Component={Signup}></Route>
-        <Route Component={NotFound} />
         <Route path="/login" Component={Login}></Route>
         <Route path="/profile" Component={Profile}></Route>
+        <Route path="*" Component={NotFound} />
       </Routes>
     </div>
   );
