@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { FaLongArrowAltRight } from "react-icons/fa";
 import { IoMdStar } from "react-icons/io";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { RiArrowDropDownLine } from "react-icons/ri";
 import { useState, useEffect } from "react";
 import happytravelimage from "../assets/happytravelimage.png";
 import whychooseusbg from "../assets/whychooseusbgimage.png";
@@ -45,6 +46,7 @@ interface Testimonial {
 }
 
 export default function Home() {
+  const [showAddress, setShowAddress] = useState(false);
   const navigate = useNavigate();
 
   const User = () => {
@@ -175,35 +177,67 @@ export default function Home() {
             <h1 className="text-[6vw]  font-semibold mb-2 leading-[1.1] whitespace-pre-line pb-6">
               Make in {"\n"}your journey
             </h1>
-            <p className="opacity-60 leading-[1.1] whitespace-pre-line">
-              Explore the world with what you love beautiful {"\n"} natural
-              beauty.
-            </p>
+
+            <div className="flex flex-row items-center">
+              <p className="opacity-90 leading-[1.1] whitespace-pre-line">
+                Explore the world with what you love beautiful {"\n"} natural
+                beauty.
+              </p>
+              <div className="flex flex-row pl-4 lg:pl-12">
+                <Link to="/signup">
+                  <button
+                    onClick={User}
+                    className="bg-white text-black hover:underline py-4 rounded-full text-[14px] mt-3"
+                  >
+                    Sign up
+                  </button>
+                </Link>
+                <Link to="/login">
+                  <button className="bg-transparent text-white hover:underline py-4 rounded-full text-[14px] mt-3 ml-2">
+                    Login
+                  </button>
+                </Link>
+              </div>
+            </div>
           </div>
           <div className="bg-white text-black  max-sm:w-[80%] max-lg:w-[60%]  lg:w-[55%]   py-2   rounded-full  pl-6 pr-2 mt-8 ">
             <ul className="flex flex-row justify-between items-center relative ">
-              <li className="opacity-50 p-0">
-                <Link to="#">Location</Link>
+              <li className="opacity-50 p-0 flex flex-col relative">
+                <div className="flex flex-row items-center">
+                  <Link to="#">Location</Link>
+                  <RiArrowDropDownLine
+                    className="text-[26px] cursor-pointer"
+                    onClick={() => setShowAddress(!showAddress)}
+                  />
+                </div>
+
+                {showAddress && (
+                  <div className="mt-1 text-sm text-black bg-white p-2 pt-4 rounded w-[220px] shadow-md absolute top-full z-10">
+                    732 Despard St, Atlanta
+                  </div>
+                )}
               </li>
-              <li className="opacity-50 p-0">
+              <li className="opacity-50 p-0 flex flex-row">
                 <Link to="#">Data</Link>
+                <RiArrowDropDownLine className="text-[26px]" />
               </li>
-              <li className="opacity-50 p-0">
+              <li className="opacity-50 p-0 flex flex-row">
                 <Link to="#">People</Link>
+                <RiArrowDropDownLine className="text-[26px]" />
               </li>
-              <Link to="/signup">
-                <button
-                  onClick={User}
-                  className="bg-black text-white py-4 rounded-full text-[14px]"
-                >
+              <Link to="/about_us">
+                <button className="bg-black text-white py-4 rounded-full text-[14px]">
                   Explore now
                 </button>
               </Link>
             </ul>
           </div>
-          <p className="opacity-70 pt-6">
-            Popular Place : Bali, Istanbul, Rome, Paris.
-          </p>
+          <div className="">
+            {" "}
+            <p className="opacity-70 pt-6">
+              Popular Place : Bali, Istanbul, Rome, Paris.
+            </p>
+          </div>
         </div>
       </div>
       {/* Featured destination section */}
@@ -217,6 +251,21 @@ export default function Home() {
           <p className="opacity-70 pt-4 text-center">
             Explore the world with what you love beautiful natural beauty.
           </p>
+          <div className="flex flex-row pt-4">
+            <Link to="/signup">
+              <button
+                onClick={User}
+                className="bg-black text-white hover:underline py-4 rounded-full text-[14px] mt-3"
+              >
+                Sign up
+              </button>
+            </Link>
+            <Link to="/login">
+              <button className="bg-transparent text-black hover:underline py-4 rounded-full text-[14px] mt-3">
+                Login
+              </button>
+            </Link>
+          </div>
         </div>
         <div className="relative max-w-6xl mx-auto px-4">
           {/* Left arrow */}
@@ -292,7 +341,6 @@ export default function Home() {
               </div>
             </div>
           ) : (
-            // Fallback to original images if API returns no data
             <div className="flex gap-4 mx-8"></div>
           )}
 
@@ -313,9 +361,24 @@ export default function Home() {
         className=" container3 bg-cover bg-center bg-no-repeat relative md:h-screen "
         style={{ backgroundImage: `url(${whychooseusbg})` }}
       >
-        <div className="flex flex-col items-center justify-center pt-16 pb-36 text-white">
+        <div className="flex flex-col items-center justify-center pt-16 pb-28 text-white">
           <h1 className="text-[5vw] font-semibold">Why choose us?</h1>
           <p>our services have been trusted by world travelers.</p>
+          <div className="flex flex-row pt-4">
+            <Link to="/signup">
+              <button
+                onClick={User}
+                className="bg-white text-black hover:underline py-4 rounded-full text-[14px] mt-3"
+              >
+                Sign up
+              </button>
+            </Link>
+            <Link to="/login">
+              <button className="bg-transparent text-white hover:underline py-4 rounded-full text-[14px] mt-3">
+                Login
+              </button>
+            </Link>
+          </div>
         </div>
         <div className="cardcontainer  md:absolute flex flex-col sm:flex-col md:flex-row gap-8 lg:gap-16 justify-center items-center mx-10 lg:mx-32">
           <div className="bg-white w-[80%] md:w-[33.3%] px-4 pt-10 pb-14 rounded-lg shadow-xl">
@@ -371,7 +434,7 @@ export default function Home() {
         </div>
       </div>
       {/* partners section */}
-      <div className="container4 mt-36 items-center justify-center flex flex-col">
+      <div className="container4 mt-48 items-center justify-center flex flex-col">
         <div className="flex flex-col items-center">
           <h1 className="font-semibold text-[4.5vw] pb-2">Our tour partner</h1>
           <p className="opacity-50 leading-[1.6] whitespace-pre-line text-center">

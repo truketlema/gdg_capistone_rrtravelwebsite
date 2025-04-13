@@ -1,6 +1,12 @@
 import type React from "react";
 import { Link } from "react-router-dom";
-import { FaLocationDot, FaPhone, FaTwitter, FaYoutube, FaInstagram } from "react-icons/fa6";
+import {
+  FaLocationDot,
+  FaPhone,
+  FaTwitter,
+  FaYoutube,
+  FaInstagram,
+} from "react-icons/fa6";
 import { MdEmail, MdFacebook } from "react-icons/md";
 import footerbg from "../assets/footerbg.png";
 import { useState } from "react";
@@ -27,9 +33,12 @@ export default function Footer() {
         style={{ backgroundImage: `url(${footerbg})` }}
       >
         <div className="max-w-3xl mx-auto">
-          <h1 className="text-3xl md:text-4xl font-bold">Subscribe to get special price</h1>
+          <h1 className="text-3xl md:text-4xl font-bold">
+            Subscribe to get special price
+          </h1>
           <p className="opacity-80 leading-relaxed pt-4 font-semibold">
-            Don't wanna miss something? Subscribe right now and get special promotion and monthly newsletter.
+            Don't wanna miss something? Subscribe right now and get special
+            promotion and monthly newsletter.
           </p>
         </div>
 
@@ -59,7 +68,8 @@ export default function Footer() {
         <div className="w-full md:w-1/4 space-y-4">
           <img src={logo} alt="Logo" width="200" />
           <p className="opacity-70">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque pharetra condimentum.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
+            pharetra condimentum.
           </p>
         </div>
 
@@ -95,29 +105,53 @@ export default function Footer() {
         <div className="w-full md:w-1/4 space-y-3">
           <h3 className="font-semibold pb-1">Quick Links</h3>
           <ul className="space-y-2 opacity-70">
-            <li className="hover:underline"><Link to="/">Home</Link></li>
-            <li className="hover:underline"><Link to="/aboutus">About Us</Link></li>
-            <li className="hover:underline"><Link to="#">Tours</Link></li>
-            <li className="hover:underline"><Link to="/contact">Contact</Link></li>
+            <li className="hover:underline">
+              <Link to="/">Home</Link>
+            </li>
+            <li className="hover:underline">
+              <Link to="/about_us">About Us</Link>
+            </li>
+            <li className="hover:underline">
+              <Link to="#">Tours</Link>
+            </li>
+            <li className="hover:underline">
+              <Link to="/contact">Contact</Link>
+            </li>
           </ul>
         </div>
         <div className="w-full md:w-1/4 space-y-3">
           <h3 className="font-semibold">Follow Us</h3>
           <div className="flex gap-4 text-xl opacity-70">
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"
-            className="hover:text-blue-500 transition-colors duration-300">
+            <a
+              href="https://facebook.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-blue-500 transition-colors duration-300"
+            >
               <MdFacebook />
             </a>
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer"
-            className="hover:text-blue-500 transition-colors duration-300">
+            <a
+              href="https://twitter.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-blue-500 transition-colors duration-300"
+            >
               <FaTwitter />
             </a>
-            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer"
-            className="hover:text-red-500 transition-colors duration-300">
+            <a
+              href="https://youtube.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-red-500 transition-colors duration-300"
+            >
               <FaYoutube />
             </a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"
-            className="hover:text-orange-400 transition-colors duration-300">
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-orange-400 transition-colors duration-300"
+            >
               <FaInstagram />
             </a>
           </div>

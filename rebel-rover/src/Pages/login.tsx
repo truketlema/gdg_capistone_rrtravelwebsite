@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -36,7 +36,7 @@ export const Login = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100 px-4">
+    <div className="flex justify-center items-center min-h-screen bg-gray-100 px-4 flex-col">
       <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-sm">
         <h2 className="text-2xl font-semibold text-center text-green-600 mb-5">
           Login
@@ -99,6 +99,9 @@ export const Login = () => {
           </button>
         </div>
       </div>
+      <Link to="/" className="text-blue-500 underline block mt-8 text-center">
+        ⬅ Back to Home
+      </Link>
     </div>
   );
 };

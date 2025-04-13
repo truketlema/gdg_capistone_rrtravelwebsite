@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 export const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -78,7 +78,7 @@ export const Signup = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100 px-4">
+    <div className="flex justify-center items-center min-h-screen bg-gray-100 px-4 flex-col pt-4 pb-4">
       <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-sm">
         <h2 className="text-2xl font-semibold text-center text-gray-800 mb-4">
           Sign Up
@@ -183,6 +183,9 @@ export const Signup = () => {
           <div className="text-red-500 text-center mt-3 text-sm">{error}</div>
         )}
       </div>
+      <Link to="/" className="text-blue-500 underline block mt-8 text-center">
+        ⬅ Back to Home
+      </Link>
     </div>
   );
 };

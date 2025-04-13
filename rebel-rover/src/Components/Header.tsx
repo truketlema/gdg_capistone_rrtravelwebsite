@@ -3,14 +3,19 @@ import { Link } from "react-router-dom";
 import logo from "../assets/logo1 1.png";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { FaSearch, FaBars, FaTimes } from "react-icons/fa";
-
+import profilePlaceholder from "../assets/profileplaceholder.png";
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [profileImage, setProfileImage] = useState("");
 
   useEffect(() => {
     const user = localStorage.getItem("loggedInUser");
-    setIsLoggedIn(!!user); // convert to boolean
+    if (user) {
+      setIsLoggedIn(true);
+      const parsedUser = JSON.parse(user);
+      setProfileImage(parsedUser.profilePicture || profilePlaceholder);
+    }
   }, []);
 
   return (
@@ -22,16 +27,13 @@ export default function Header() {
           width="250"
           height="40"
         />
+
         <ul
           className="hidden md:flex items-center gap-6 sm:gap-8 md:gap-4 lg:gap-8 xl:gap-10 
           text-[16px] md:text-[14px] lg:text-[18px] xl:text-[18px] transition-all duration-200"
         >
           <li className="flex items-center">
             <Link to="/">Home</Link>
-          </li>
-
-          <li className="flex items-center">
-            <Link to="/about_us">About Us</Link>
           </li>
 
           <li className="relative flex items-center gap-1">
@@ -101,14 +103,14 @@ export default function Header() {
             </Link>
           </li>
 
-          {/* Profile button shown only when logged in */}
           {isLoggedIn && (
             <li>
-              <Link
-                to="/profile"
-                className="bg-white text-blue-900 font-medium px-4 py-1.5 rounded-full hover:bg-blue-100 transition"
-              >
-                Profile
+              <Link to="/profile">
+                <img
+                  src={profileImage}
+                  alt="Profile"
+                  className="w-10 h-10 rounded-full object-cover border-1 border-white hover:opacity-80 transition"
+                />
               </Link>
             </li>
           )}
@@ -129,11 +131,6 @@ export default function Header() {
           <li>
             <Link to="/" onClick={() => setMenuOpen(false)}>
               Home
-            </Link>
-          </li>
-          <li>
-            <Link to="/about_us" onClick={() => setMenuOpen(false)}>
-              About Us
             </Link>
           </li>
           <li>
@@ -161,12 +158,14 @@ export default function Header() {
               <FaSearch className="inline-block mr-1" /> Search
             </Link>
           </li>
-
-          {/* Mobile Profile button */}
           {isLoggedIn && (
             <li>
               <Link to="/profile" onClick={() => setMenuOpen(false)}>
-                Profile
+                <img
+                  src={profileImage}
+                  alt="Profile"
+                  className="w-10 h-10 rounded-full object-cover border-2 border-white"
+                />
               </Link>
             </li>
           )}
