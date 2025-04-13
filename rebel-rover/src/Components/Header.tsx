@@ -14,7 +14,7 @@ export default function Header() {
     if (user) {
       setIsLoggedIn(true);
       const parsedUser = JSON.parse(user);
-      setProfileImage(parsedUser.profilePicture || profilePlaceholder);
+      setProfileImage(parsedUser.profileImage || profilePlaceholder);
     }
   }, []);
 
@@ -107,7 +107,7 @@ export default function Header() {
             <li>
               <Link to="/profile">
                 <img
-                  src={profileImage}
+                  src={profilePlaceholder}
                   alt="Profile"
                   className="w-10 h-10 rounded-full object-cover border-1 border-white hover:opacity-80 transition"
                 />

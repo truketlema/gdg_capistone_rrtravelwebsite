@@ -173,7 +173,7 @@ export default function Home() {
       >
         <Header />
         <div className="lg:pl-16 md:pl-8 pl-4">
-          <div className="flex flex-col pt-24 pl-10 lg:pl-0 ">
+          <div className="flex flex-col pt-20 pl-10 lg:pl-0 ">
             <h1 className="text-[6vw]  font-semibold mb-2 leading-[1.1] whitespace-pre-line pb-6">
               Make in {"\n"}your journey
             </h1>
