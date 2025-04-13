@@ -8,9 +8,8 @@ interface PaymentMethod {
 }
 
 export const PaymentForm = () => {
-  // Use useLocation to access the passed state
   const location = useLocation();
-  const { price, bookingType } = location.state || {}; // Destructure price and bookingType from state
+  const { price, bookingType } = location.state || {};
 
   const [selectedPaymentMethod, setSelectedPaymentMethod] =
     useState<string>("credit-card");
@@ -35,7 +34,6 @@ export const PaymentForm = () => {
       return;
     }
 
-    // Handle form submission here
     alert("Payment method details submitted successfully!");
   };
 
@@ -51,10 +49,10 @@ export const PaymentForm = () => {
 
           <div className="mb-6">
             <label className="block text-sm font-semibold mb-2">
-              Booking Type: {bookingType} {/* Display booking type */}
+              Booking Type: {bookingType}
             </label>
             <label className="block text-sm font-semibold mb-2">
-              Total Amount: ${price} {/* Display total amount */}
+              Total Amount: ${price}
             </label>
           </div>
 
@@ -185,7 +183,7 @@ export const PaymentForm = () => {
       </div>
 
       <Link
-        to={{ pathname: "/profile" }} // Correctly pass the state if needed
+        to={{ pathname: "/profile" }}
         className="text-blue-500 underline block mt-8 text-center"
       >
         ⬅ Back to Profile
