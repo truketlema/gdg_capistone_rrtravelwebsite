@@ -9,7 +9,7 @@ import { Packages } from "./Pages/Packages";
 import "./App.css";
 import { Signup } from "./Pages/SignUp";
 import { Login } from "./Pages/login";
-
+import { PaymentForm } from "./Pages/PaymentForm";
 function App() {
   return (
     <div className="App">
@@ -23,6 +23,7 @@ function App() {
         <Route path="/SignUp" Component={Signup}></Route>
         <Route path="/login" Component={Login}></Route>
         <Route path="/profile" Component={Profile}></Route>
+        <Route path="payment_form" Component={PaymentForm}></Route>
         <Route path="*" Component={NotFound} />
       </Routes>
     </div>

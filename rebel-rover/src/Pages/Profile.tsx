@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import travelimage from "../assets/travel-image.jpg";
 import image from "../assets/package-image.png";
+
 interface User {
   email: string;
   password: string;
@@ -128,6 +129,21 @@ export const Profile = () => {
           >
             Delete
           </button>
+        )}
+        {booking.status === "Pending" && (
+          <Link
+            to="/payment_form"
+            state={{
+              price: booking.price,
+              bookingType: booking.status,
+              country: booking.country,
+              destination: booking.destinationName,
+            }}
+          >
+            <button className="absolute bottom-2 right-2 bg-green-500 text-white text-xs px-2 py-2 rounded">
+              Pay and Confirm
+            </button>
+          </Link>
         )}
       </div>
     </div>
