@@ -436,7 +436,7 @@ export default function Home() {
             {"\n"} the majority have suffered alteration
           </p>
         </div>
-        <div className="flex flex-row gap-16 items-center justify-center pt-10 pb-24 mx-4">
+        <div className="flex flex-row gap-4 lg:gap-16 items-center justify-center pt-10 pb-24 mx-4">
           <Link to="#">
             <img
               src={katana || "/placeholder.svg"}
