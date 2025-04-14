@@ -204,16 +204,16 @@ export default function Home() {
                   </div>
                 )}
               </li>
-              <li className="opacity-50 p-0 flex flex-row">
+              <li className="opacity-50 p-0 flex flex-row max-sm:hidden">
                 <Link to="#">Data</Link>
                 <RiArrowDropDownLine className="text-[26px]" />
               </li>
-              <li className="opacity-50 p-0 flex flex-row">
+              <li className="opacity-50 p-0 flex flex-row max-sm:hidden">
                 <Link to="#">People</Link>
                 <RiArrowDropDownLine className="text-[26px]" />
               </li>
               <Link to="/packages">
-                <button className="bg-black text-white  rounded-full hover:scale-105 transition-all duration-300 ">
+                <button className="bg-black text-white  rounded-full hover:scale-105 transition-all duration-300 text-sm sm:text-lg  ">
                   Explore now
                 </button>
               </Link>
@@ -242,13 +242,13 @@ export default function Home() {
             <Link to="/signup">
               <button
                 onClick={User}
-                className="bg-black text-white hover:scale-105 transition-all duration-300  rounded-full  mt-3"
+                className="bg-black text-white hover:scale-105 transition-all duration-300  rounded-full  mt-3  text-sm sm:text-lg  "
               >
                 Sign up
               </button>
             </Link>
             <Link to="/login">
-              <button className="bg-transparent text-black hover:scale-105 transition-all duration-300 rounded-full  mt-3">
+              <button className="bg-transparent text-black hover:scale-105 transition-all duration-300 rounded-full  mt-3  text-sm sm:text-lg  ">
                 Login
               </button>
             </Link>
@@ -355,13 +355,13 @@ export default function Home() {
             <Link to="/signup">
               <button
                 onClick={User}
-                className="bg-white text-black rounded-full mt-3 hover:scale-105 transition-all duration-300"
+                className="bg-white text-black rounded-full mt-3 hover:scale-105 transition-all duration-300  text-sm sm:text-lg  "
               >
                 Sign up
               </button>
             </Link>
             <Link to="/login">
-              <button className="bg-transparent text-white hover:scale-105 transition-all duration-300  rounded-full  mt-3">
+              <button className="bg-transparent text-white hover:scale-105 transition-all duration-300  rounded-full  mt-3  text-sm sm:text-lg  ">
                 Login
               </button>
             </Link>
