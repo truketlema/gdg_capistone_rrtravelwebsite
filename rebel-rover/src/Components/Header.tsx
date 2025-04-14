@@ -8,7 +8,7 @@ import profilePlaceholder from "../assets/profileplaceholder.png";
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [profileImage, setProfileImage] = useState("");
+  const [profilePicture, setNewProfilePicture] = useState("");
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
   const toggleDropdown = (menu: string) => {
@@ -20,7 +20,7 @@ export default function Header() {
     if (user) {
       setIsLoggedIn(true);
       const parsedUser = JSON.parse(user);
-      setProfileImage(parsedUser.profileImage || profilePlaceholder);
+      setNewProfilePicture(parsedUser.profilePicture || profilePlaceholder);
     }
   }, []);
 
@@ -121,7 +121,7 @@ export default function Header() {
             <li>
               <Link to="/profile">
                 <img
-                  src={profileImage}
+                  src={profilePicture}
                   alt="Profile"
                   className="w-10 h-10 rounded-full object-cover border-1 border-white hover:opacity-80 transition"
                 />
@@ -176,7 +176,7 @@ export default function Header() {
             <li>
               <Link to="/profile" onClick={() => setMenuOpen(false)}>
                 <img
-                  src={profileImage}
+                  src={profilePicture}
                   alt="Profile"
                   className="w-10 h-10 rounded-full object-cover border-2 border-white"
                 />
