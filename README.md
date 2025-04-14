@@ -91,7 +91,11 @@ The project uses the following MockAPI endpoints:
   - `POST`: Create new destination (admin)
   - `PUT`: Update destination (admin)
   - `DELETE`: Remove destination (admin)
+ 
+### Deployment
 
+```
+https://rebel-rover-tt.netlify.app/
 ```
 ## Contributing
 
