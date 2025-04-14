@@ -37,6 +37,24 @@ export default function Header() {
             <Link to="/">Home</Link>
           </li>
 
+          <li className="relative flex items-center gap-1 md:hidden lg:flex">
+            <Link to="about_us" className="flex items-center gap-0.5">
+              About us <RiArrowDropDownLine className="text-2xl" />
+            </Link>
+            {menuOpen && (
+              <ul className="absolute text-white mt-2 p-2 space-y-2 w-40 top-full left-0">
+                <li>
+                  <Link to="/about_us/option1">Option 1</Link>
+                </li>
+                <li>
+                  <Link to="/about_us/option2">Option 2</Link>
+                </li>
+                <li>
+                  <Link to="/about_us/option3">Option 3</Link>
+                </li>
+              </ul>
+            )}
+          </li>
           <li className="relative flex items-center gap-2">
             <Link to="/packages" className="flex items-center gap-0.5">
               Package <RiArrowDropDownLine className="text-2xl" />
@@ -51,25 +69,6 @@ export default function Header() {
                 </li>
                 <li>
                   <Link to="/packages/option3">Option 3</Link>
-                </li>
-              </ul>
-            )}
-          </li>
-
-          <li className="relative flex items-center gap-1 md:hidden lg:flex">
-            <Link to="#" className="flex items-center gap-0.5">
-              Destination <RiArrowDropDownLine className="text-2xl" />
-            </Link>
-            {menuOpen && (
-              <ul className="absolute text-white mt-2 p-2 space-y-2 w-40 top-full left-0">
-                <li>
-                  <Link to="/destination/option1">Option 1</Link>
-                </li>
-                <li>
-                  <Link to="/destination/option2">Option 2</Link>
-                </li>
-                <li>
-                  <Link to="/destination/option3">Option 3</Link>
                 </li>
               </ul>
             )}
@@ -139,8 +138,8 @@ export default function Header() {
             </Link>
           </li>
           <li>
-            <Link to="#" onClick={() => setMenuOpen(false)}>
-              Destination
+            <Link to="about_us" onClick={() => setMenuOpen(false)}>
+              About us
             </Link>
           </li>
           <li>

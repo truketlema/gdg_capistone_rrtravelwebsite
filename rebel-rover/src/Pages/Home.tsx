@@ -212,7 +212,7 @@ export default function Home() {
                 <Link to="#">People</Link>
                 <RiArrowDropDownLine className="text-[26px]" />
               </li>
-              <Link to="/about_us">
+              <Link to="/packages">
                 <button className="bg-black text-white  rounded-full hover:scale-105 transition-all duration-300 ">
                   Explore now
                 </button>
