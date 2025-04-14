@@ -65,8 +65,8 @@ export default function Header() {
           </li>
 
           <li className="relative flex items-center gap-2 lg:flex">
-            <Link to="/destination" className="flex items-center gap-0.5">
-              Destination
+            <Link to="/about_us" className="flex items-center gap-0.5">
+              About_us
             </Link>
             <RiArrowDropDownLine
               className="text-2xl cursor-pointer"
@@ -121,7 +121,7 @@ export default function Header() {
             <li>
               <Link to="/profile">
                 <img
-                  src={profilePicture}
+                  src={profilePicture || profilePlaceholder}
                   alt="Profile"
                   className="w-10 h-10 rounded-full object-cover border-1 border-white hover:opacity-80 transition"
                 />
@@ -153,8 +153,8 @@ export default function Header() {
             </Link>
           </li>
           <li>
-            <Link to="/destination" onClick={() => setMenuOpen(false)}>
-              Destination
+            <Link to="/about_us" onClick={() => setMenuOpen(false)}>
+              About_us
             </Link>
           </li>
           <li>
