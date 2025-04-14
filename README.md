@@ -1,6 +1,4 @@
-# Rebel Rover Travel Website - React Capstone Project
-
-![Rebel Rover Travel](public/logo.png) <!-- Add your logo path here -->
+# Rebel Rover Travel Website - React Capstone
 
 A modern travel booking platform built with React, integrating with MockAPI for dynamic travel destination data.
 
@@ -95,20 +93,6 @@ The project uses the following MockAPI endpoints:
   - `DELETE`: Remove destination (admin)
 
 ```
-
-## Deployment
-
-The project is deployed on Vercel:
-
-🌐 [Live Demo](https://rebel-rover-travel.vercel.app)
-
-To deploy your own version:
-1. Push your code to a GitHub repository
-2. Create a Vercel account
-3. Import the GitHub repository
-4. Configure build settings (Vite defaults work)
-5. Deploy!
-
 ## Contributing
 
 Contributions are welcome! Please follow these steps:
@@ -128,4 +112,4 @@ Distributed under the MIT License. See `LICENSE` for more information.
 **Design Reference**: [Figma Design](https://www.figma.com/file/your-design-link)  
 **API Documentation**: [MockAPI Guide](https://mockapi.io/docs)  
 
-Built with ❤️ by [Your Name] as a React capstone project.
+Built with ❤️ by Team 4 as a React capstone project.
