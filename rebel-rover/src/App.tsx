@@ -10,6 +10,7 @@ import "./App.css";
 import { Signup } from "./Pages/SignUp";
 import { Login } from "./Pages/login";
 import { PaymentForm } from "./Pages/PaymentForm";
+import { Destination } from "./Pages/Destination";
 function App() {
   return (
     <div className="App">
@@ -24,6 +25,7 @@ function App() {
         <Route path="/login" Component={Login}></Route>
         <Route path="/profile" Component={Profile}></Route>
         <Route path="payment_form" Component={PaymentForm}></Route>
+        <Route path="/destination" Component={Destination}></Route>
         <Route path="*" Component={NotFound} />
       </Routes>
     </div>

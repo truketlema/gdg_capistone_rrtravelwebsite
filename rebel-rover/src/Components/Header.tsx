@@ -75,10 +75,7 @@ export default function Header() {
             {openDropdown === "destination" && (
               <ul className="absolute text-white mt-2 p-2 space-y-2 w-40 top-full left-0 bg-[rgba(10,28,108,0.7)]">
                 <li>
-                  <Link to="/destination/option1">Destination</Link>
-                </li>
-                <li>
-                  <Link to="/destination/option2">Tips & Articles</Link>
+                  <Link to="/destination/option1">Destinations</Link>
                 </li>
               </ul>
             )}
