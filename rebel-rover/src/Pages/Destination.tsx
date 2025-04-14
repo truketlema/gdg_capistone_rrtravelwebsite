@@ -1,10 +1,9 @@
-import Banner from "../Components/Banner";
 import image from "../assets/package-image.png";
-import { Article } from "../Components/Article";
+
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Footer from "../Components/Footer";
-import banner from "../assets/banner-package-image.png";
+
 import Header from "../Components/Header";
 import travel_destination from "../assets/travel-destination.jpg";
 interface Booking {

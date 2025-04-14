@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import travelimage from "../assets/travel-image.jpg";
 import image from "../assets/package-image.png";
-import Header from "../Components/Header";
 
 interface User {
   email: string;
