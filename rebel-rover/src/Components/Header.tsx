@@ -8,14 +8,19 @@ import profilePlaceholder from "../assets/profileplaceholder.png";
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [profilePicture, setProfilePicture] = useState("");
+  const [profileImage, setProfileImage] = useState("");
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+
+  const toggleDropdown = (menu: string) => {
+    setOpenDropdown((prev) => (prev === menu ? null : menu));
+  };
 
   useEffect(() => {
     const user = localStorage.getItem("loggedInUser");
     if (user) {
       setIsLoggedIn(true);
       const parsedUser = JSON.parse(user);
-      setProfilePicture(parsedUser.profilePicture || profilePlaceholder); // ✅ FIXED
+      setProfileImage(parsedUser.profileImage || profilePlaceholder);
     }
   }, []);
 
@@ -28,76 +33,85 @@ export default function Header() {
           width="250"
           height="40"
         />
-
+        <div className="hidden md:flex">
+          <ul>
+            <li className="flex items-center ml-4 mr-8 text-[17px] ] lg:text-[18px] xl:text-[18px] transition-all duration-200">
+              <Link to="/">Home</Link>
+            </li>
+          </ul>
+        </div>
         <ul
-          className="hidden md:flex items-center gap-6 sm:gap-8 md:gap-4 lg:gap-8 xl:gap-10 
-          text-[17px] lg:text-[18px] xl:text-[18px] transition-all duration-200"
+          className="hidden md:flex items-center  gap-8 sm:gap-8 md:gap-2 lg:gap-8 xl:gap-10 
+          text-[17px] ] lg:text-[18px] xl:text-[18px] transition-all duration-200"
         >
-          <li className="flex items-center ml-4 mr-8">
-            <Link to="/">Home</Link>
-          </li>
-
-          <li className="relative flex items-center gap-1 md:hidden lg:flex">
-            <Link to="about_us" className="flex items-center gap-0.5">
-              About us <RiArrowDropDownLine className="text-2xl" />
-            </Link>
-            {menuOpen && (
-              <ul className="absolute text-white mt-2 p-2 space-y-2 w-40 top-full left-0">
-                <li>
-                  <Link to="/about_us/option1">Option 1</Link>
-                </li>
-                <li>
-                  <Link to="/about_us/option2">Option 2</Link>
-                </li>
-                <li>
-                  <Link to="/about_us/option3">Option 3</Link>
-                </li>
-              </ul>
-            )}
-          </li>
           <li className="relative flex items-center gap-2">
             <Link to="/packages" className="flex items-center gap-0.5">
-              Package <RiArrowDropDownLine className="text-2xl" />
+              Package
             </Link>
-            {menuOpen && (
-              <ul className="absolute text-white mt-2 p-2 space-y-2 w-40 top-full left-0">
+            <RiArrowDropDownLine
+              className="text-2xl cursor-pointer"
+              onClick={() => toggleDropdown("package")}
+            />
+            {openDropdown === "package" && (
+              <ul className="absolute text-white mt-2 p-2 space-y-2 w-40 top-full left-0 bg-[rgba(10,28,108,0.7)]">
                 <li>
-                  <Link to="/packages/option1">Option 1</Link>
+                  <Link to="/destination/option1">Destination</Link>
                 </li>
                 <li>
-                  <Link to="/packages/option2">Option 2</Link>
-                </li>
-                <li>
-                  <Link to="/packages/option3">Option 3</Link>
+                  <Link to="/destination/option2">Tips & Articles</Link>
                 </li>
               </ul>
             )}
           </li>
 
-          <li className="relative flex items-center gap-1">
+          <li className="relative flex items-center gap-2 lg:flex">
+            <Link to="/destination" className="flex items-center gap-0.5">
+              Destination
+            </Link>
+            <RiArrowDropDownLine
+              className="text-2xl cursor-pointer"
+              onClick={() => toggleDropdown("destination")}
+            />
+            {openDropdown === "destination" && (
+              <ul className="absolute text-white mt-2 p-2 space-y-2 w-40 top-full left-0 bg-[rgba(10,28,108,0.7)]">
+                <li>
+                  <Link to="/destination/option1">Destination</Link>
+                </li>
+                <li>
+                  <Link to="/destination/option2">Tips & Articles</Link>
+                </li>
+              </ul>
+            )}
+          </li>
+
+          <li className="relative flex items-center gap-2">
             <Link to="/blog/:id" className="flex items-center gap-0.5">
-              Blog <RiArrowDropDownLine className="text-2xl" />
+              Blog
             </Link>
-            {menuOpen && (
-              <ul className="absolute text-white mt-2 p-2 space-y-2 w-40 top-full left-0">
+            <RiArrowDropDownLine
+              className="text-2xl cursor-pointer"
+              onClick={() => toggleDropdown("blog")}
+            />
+            {openDropdown === "blog" && (
+              <ul className="absolute text-white mt-2 p-2 space-y-2 w-40 top-full left-0 bg-[rgba(10,28,108,0.7)]">
                 <li>
-                  <Link to="/blog/option1">Option 1</Link>
+                  <Link to="/blog/:id/option1">Stories</Link>
                 </li>
                 <li>
-                  <Link to="/blog/option2">Option 2</Link>
+                  <Link to="/blog/:id/option2">Recent posts</Link>
                 </li>
                 <li>
-                  <Link to="/blog/option3">Option 3</Link>
+                  <Link to="/blog/:id/option3">Comment</Link>
                 </li>
               </ul>
             )}
           </li>
 
-          <li>
+          <li className="max-lg:hidden">
             <Link to="/contact">Contact</Link>
           </li>
 
-          <li>
+          <li className="max-lg:hidden">
             <Link to="#">
               <FaSearch className="text-lg" />
             </Link>
@@ -107,16 +121,16 @@ export default function Header() {
             <li>
               <Link to="/profile">
                 <img
-                  src={profilePicture || profilePlaceholder} // ✅ FIXED
+                  src={profileImage}
                   alt="Profile"
                   className="w-10 h-10 rounded-full object-cover border-1 border-white hover:opacity-80 transition"
-                  onError={(e) => (e.currentTarget.src = profilePlaceholder)}
                 />
               </Link>
             </li>
           )}
         </ul>
 
+        {/* Mobile Toggle */}
         <button
           className="md:hidden text-2xl bg-transparent"
           onClick={() => setMenuOpen(!menuOpen)}
@@ -125,6 +139,7 @@ export default function Header() {
         </button>
       </div>
 
+      {/* Mobile toggle menu */}
       {menuOpen && (
         <ul className="flex flex-col mt-4 gap-3 md:hidden text-sm text-white">
           <li>
@@ -138,8 +153,8 @@ export default function Header() {
             </Link>
           </li>
           <li>
-            <Link to="about_us" onClick={() => setMenuOpen(false)}>
-              About us
+            <Link to="/destination" onClick={() => setMenuOpen(false)}>
+              Destination
             </Link>
           </li>
           <li>
@@ -161,10 +176,9 @@ export default function Header() {
             <li>
               <Link to="/profile" onClick={() => setMenuOpen(false)}>
                 <img
-                  src={profilePicture || profilePlaceholder}
+                  src={profileImage}
                   alt="Profile"
                   className="w-10 h-10 rounded-full object-cover border-2 border-white"
-                  onError={(e) => (e.currentTarget.src = profilePlaceholder)}
                 />
               </Link>
             </li>
