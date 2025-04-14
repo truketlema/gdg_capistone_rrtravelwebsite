@@ -44,26 +44,6 @@ export default function Header() {
           className="hidden md:flex items-center  gap-8 sm:gap-8 md:gap-2 lg:gap-8 xl:gap-10 
           text-[17px] ] lg:text-[18px] xl:text-[18px] transition-all duration-200"
         >
-          <li className="relative flex items-center gap-2">
-            <Link to="/packages" className="flex items-center gap-0.5">
-              Package
-            </Link>
-            <RiArrowDropDownLine
-              className="text-2xl cursor-pointer"
-              onClick={() => toggleDropdown("package")}
-            />
-            {openDropdown === "package" && (
-              <ul className="absolute text-white mt-2 p-2 space-y-2 w-40 top-full left-0 bg-[rgba(10,28,108,0.7)]">
-                <li>
-                  <Link to="/destination/option1">Destination</Link>
-                </li>
-                <li>
-                  <Link to="/destination/option2">Tips & Articles</Link>
-                </li>
-              </ul>
-            )}
-          </li>
-
           <li className="relative flex items-center gap-2 lg:flex">
             <Link to="/about_us" className="flex items-center gap-0.5">
               About_us
@@ -75,10 +55,32 @@ export default function Header() {
             {openDropdown === "destination" && (
               <ul className="absolute text-white mt-2 p-2 space-y-2 w-40 top-full left-0 bg-[rgba(10,28,108,0.7)]">
                 <li>
-                  <Link to="/destination/option1">Destination</Link>
+                  <Link to="/about_us/option1">Team</Link>
                 </li>
                 <li>
-                  <Link to="/destination/option2">Tips & Articles</Link>
+                  <Link to="/about_us/option2">Vision & Mission </Link>
+                </li>
+                <li>
+                  <Link to="/about_us/option2">Memories </Link>
+                </li>
+              </ul>
+            )}
+          </li>
+          <li className="relative flex items-center gap-2">
+            <Link to="/packages" className="flex items-center gap-0.5">
+              Package
+            </Link>
+            <RiArrowDropDownLine
+              className="text-2xl cursor-pointer"
+              onClick={() => toggleDropdown("package")}
+            />
+            {openDropdown === "package" && (
+              <ul className="absolute text-white mt-2 p-2 space-y-2 w-40 top-full left-0 bg-[rgba(10,28,108,0.7)]">
+                <li>
+                  <Link to="/packages/option1">Destination</Link>
+                </li>
+                <li>
+                  <Link to="/packages/option2">Tips & Articles</Link>
                 </li>
               </ul>
             )}
@@ -148,15 +150,16 @@ export default function Header() {
             </Link>
           </li>
           <li>
-            <Link to="/packages" onClick={() => setMenuOpen(false)}>
-              Package
-            </Link>
-          </li>
-          <li>
             <Link to="/about_us" onClick={() => setMenuOpen(false)}>
               About_us
             </Link>
           </li>
+          <li>
+            <Link to="/packages" onClick={() => setMenuOpen(false)}>
+              Package
+            </Link>
+          </li>
+
           <li>
             <Link to="/blog/:id" onClick={() => setMenuOpen(false)}>
               Blog
