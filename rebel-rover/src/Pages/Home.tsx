@@ -380,9 +380,12 @@ export default function Home() {
             <p className="opacity-50 pb-6">
               our service is reliable and convenient, our service is quality.
             </p>
-            <p className="flex flex-row gap-2 items-center pb-8 ">
-              Learn more <FaLongArrowAltRight className="translate-y-[1px]" />
-            </p>
+            <div className="flex flex-row gap-2 items-center pb-8">
+              <p className=" ">Learn more</p>
+              <Link to="about_us">
+                <FaLongArrowAltRight className="translate-y-[1px]" />
+              </Link>
+            </div>
           </div>
           <div className="bg-white w-[80%] md:w-[33.3%] px-4 pt-10 pb-14 rounded-lg shadow-xl">
             <img
@@ -396,10 +399,12 @@ export default function Home() {
             <p className="opacity-50 pb-6">
               our service is reliable and convenient, our service is quality.
             </p>
-            <p className="flex flex-row gap-2 items-center pb-8  ">
-              Learn more
-              <FaLongArrowAltRight className="translate-y-[1px]" />
-            </p>
+            <div className="flex flex-row gap-2 items-center pb-8">
+              <p className=" ">Learn more</p>
+              <Link to="about_us">
+                <FaLongArrowAltRight className="translate-y-[1px]" />
+              </Link>
+            </div>
           </div>
           <div className="bg-white w-[80%] md:w-[33.3%] px-4 pt-10 pb-14 rounded-lg shadow-xl">
             <img
@@ -412,11 +417,13 @@ export default function Home() {
             <h2 className="font-bold text-[18px] pb-2">Handpicked Hotels</h2>
             <p className="opacity-50 pb-6">
               our service is reliable and convenient, our service is quality.
-            </p>
-            <p className="flex flex-row gap-2 items-center pb-8  ">
-              Learn more
-              <FaLongArrowAltRight className="translate-y-[1px]" />
-            </p>
+            </p>{" "}
+            <div className="flex flex-row gap-2 items-center pb-8">
+              <p className=" ">Learn more</p>
+              <Link to="about_us">
+                <FaLongArrowAltRight className="translate-y-[1px]" />
+              </Link>
+            </div>
           </div>
         </div>
       </div>
