@@ -4,17 +4,18 @@ import logo from "../assets/logo1 1.png";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { FaSearch, FaBars, FaTimes } from "react-icons/fa";
 import profilePlaceholder from "../assets/profileplaceholder.png";
+
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [profileImage, setProfileImage] = useState("");
+  const [profilePicture, setProfilePicture] = useState("");
 
   useEffect(() => {
     const user = localStorage.getItem("loggedInUser");
     if (user) {
       setIsLoggedIn(true);
       const parsedUser = JSON.parse(user);
-      setProfileImage(parsedUser.profileImage || profilePlaceholder);
+      setProfilePicture(parsedUser.profilePicture || profilePlaceholder); // ✅ FIXED
     }
   }, []);
 
@@ -30,13 +31,13 @@ export default function Header() {
 
         <ul
           className="hidden md:flex items-center gap-6 sm:gap-8 md:gap-4 lg:gap-8 xl:gap-10 
-          text-[16px] md:text-[14px] lg:text-[18px] xl:text-[18px] transition-all duration-200"
+          text-[17px] lg:text-[18px] xl:text-[18px] transition-all duration-200"
         >
-          <li className="flex items-center">
+          <li className="flex items-center ml-4 mr-8">
             <Link to="/">Home</Link>
           </li>
 
-          <li className="relative flex items-center gap-1">
+          <li className="relative flex items-center gap-2">
             <Link to="/packages" className="flex items-center gap-0.5">
               Package <RiArrowDropDownLine className="text-2xl" />
             </Link>
@@ -55,7 +56,7 @@ export default function Header() {
             )}
           </li>
 
-          <li className="relative flex items-center gap-1">
+          <li className="relative flex items-center gap-1 md:hidden lg:flex">
             <Link to="#" className="flex items-center gap-0.5">
               Destination <RiArrowDropDownLine className="text-2xl" />
             </Link>
@@ -107,16 +108,16 @@ export default function Header() {
             <li>
               <Link to="/profile">
                 <img
-                  src={profilePlaceholder}
+                  src={profilePicture || profilePlaceholder} // ✅ FIXED
                   alt="Profile"
                   className="w-10 h-10 rounded-full object-cover border-1 border-white hover:opacity-80 transition"
+                  onError={(e) => (e.currentTarget.src = profilePlaceholder)}
                 />
               </Link>
             </li>
           )}
         </ul>
 
-        {/* Mobile Toggle */}
         <button
           className="md:hidden text-2xl bg-transparent"
           onClick={() => setMenuOpen(!menuOpen)}
@@ -125,7 +126,6 @@ export default function Header() {
         </button>
       </div>
 
-      {/* Mobile toggle menu */}
       {menuOpen && (
         <ul className="flex flex-col mt-4 gap-3 md:hidden text-sm text-white">
           <li>
@@ -162,9 +162,10 @@ export default function Header() {
             <li>
               <Link to="/profile" onClick={() => setMenuOpen(false)}>
                 <img
-                  src={profileImage}
+                  src={profilePicture || profilePlaceholder}
                   alt="Profile"
                   className="w-10 h-10 rounded-full object-cover border-2 border-white"
+                  onError={(e) => (e.currentTarget.src = profilePlaceholder)}
                 />
               </Link>
             </li>

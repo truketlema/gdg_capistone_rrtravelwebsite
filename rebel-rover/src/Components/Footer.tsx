@@ -44,18 +44,18 @@ export default function Footer() {
 
         <form
           onSubmit={handleSubmit}
-          className="flex flex-col sm:flex-row justify-between items-center bg-white rounded-full px-2 py-1 mt-10 sm:w-[80%] md:w-[60%] lg:w-[40%] mx-auto"
+          className="flex flex-row sm:flex-row justify-between items-center bg-white rounded-full px-2 py-1 mt-10 w-[90%] md:w-[60%]  lg:w-[40%] mx-auto"
         >
           <input
             onChange={(e) => setEmail(e.target.value)}
             type="email"
             placeholder="Type your email here"
             value={email}
-            className="p-2 px-4 text-black w-full border-none focus:outline-none rounded-full mb-2 sm:mb-0 sm:mr-2"
+            className="p-2 px-4 text-black w-52 border-none focus:outline-none rounded-full mb-2 sm:mb-0 sm:mr-2 "
           />
           <button
             type="submit"
-            className="bg-black text-white text-sm px-4 py-2 rounded-full"
+            className="bg-black text-white rounded-full hover:scale-105 transition-all duration-300"
           >
             Subscribe
           </button>

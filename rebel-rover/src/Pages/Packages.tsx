@@ -67,7 +67,7 @@ export const Packages = () => {
           </p>
           <button
             onClick={toggleCollapse}
-            className="mt-4 sm:mt-0 text-sm sm:text-lg"
+            className="mt-4 sm:mt-0 text-sm sm:text-lg hover:scale-105 transition-all duration-300"
           >
             {isCollapsed ? "Discover more" : "View Less"}
           </button>
@@ -81,7 +81,7 @@ export const Packages = () => {
           />
           <button
             type="submit"
-            className="absolute right-0 top-0 px-6 rounded-[72px] m-[10px]"
+            className="absolute right-0 top-0 px-6 rounded-[72px] m-[10px] hover:scale-105 transition-all duration-300"
           >
             <span className="sm:hidden">
               <i className="fa-solid fa-search"></i>
@@ -121,7 +121,7 @@ export const Packages = () => {
                         <i className="fa-solid fa-star text-star-color"></i>
                       </div>
                       <button
-                        className="text-sm sm:text-lg text-green-600 hover:underline"
+                        className="text-sm sm:text-lg text-green-600 hover:underline hover:scale-105 transition-all duration-300"
                         onClick={() => {
                           const loggedInUser = JSON.parse(
                             localStorage.getItem("loggedInUser") || "null"

@@ -167,13 +167,15 @@ export default function Home() {
   return (
     <div className="overflow-hidden">
       {/* hero section */}
+      <div className="absolute top-0 left-0 w-full z-10 ">
+        <Header />
+      </div>
       <div
         className="bg-cover bg-center h-screen text-white"
         style={{ backgroundImage: `url(${suitcase})` }}
       >
-        <Header />
         <div className="lg:pl-16 md:pl-8 pl-4">
-          <div className="flex flex-col pt-20 pl-10 lg:pl-0 ">
+          <div className="flex flex-col pt-36 pl-10 lg:pl-0 ">
             <h1 className="text-[6vw]  font-semibold mb-2 leading-[1.1] whitespace-pre-line pb-6">
               Make in {"\n"}your journey
             </h1>
@@ -183,24 +185,9 @@ export default function Home() {
                 Explore the world with what you love beautiful {"\n"} natural
                 beauty.
               </p>
-              <div className="flex flex-row pl-4 lg:pl-12">
-                <Link to="/signup">
-                  <button
-                    onClick={User}
-                    className="bg-white text-black hover:underline py-4 rounded-full text-[14px] mt-3"
-                  >
-                    Sign up
-                  </button>
-                </Link>
-                <Link to="/login">
-                  <button className="bg-transparent text-white hover:underline py-4 rounded-full text-[14px] mt-3 ml-2">
-                    Login
-                  </button>
-                </Link>
-              </div>
             </div>
           </div>
-          <div className="bg-white text-black  max-sm:w-[80%] max-lg:w-[60%]  lg:w-[55%]   py-2   rounded-full  pl-6 pr-2 mt-8 ">
+          <div className="bg-white text-black  max-md:w-[95%] max-lg:w-[70%]  lg:w-[55%]   py-2   rounded-full  pl-6 pr-2 mt-8 ">
             <ul className="flex flex-row justify-between items-center relative ">
               <li className="opacity-50 p-0 flex flex-col relative">
                 <div className="flex flex-row items-center">
@@ -226,7 +213,7 @@ export default function Home() {
                 <RiArrowDropDownLine className="text-[26px]" />
               </li>
               <Link to="/about_us">
-                <button className="bg-black text-white py-4 rounded-full text-[14px]">
+                <button className="bg-black text-white  rounded-full hover:scale-105 transition-all duration-300 ">
                   Explore now
                 </button>
               </Link>
@@ -255,13 +242,13 @@ export default function Home() {
             <Link to="/signup">
               <button
                 onClick={User}
-                className="bg-black text-white hover:underline py-4 rounded-full text-[14px] mt-3"
+                className="bg-black text-white hover:scale-105 transition-all duration-300  rounded-full  mt-3"
               >
                 Sign up
               </button>
             </Link>
             <Link to="/login">
-              <button className="bg-transparent text-black hover:underline py-4 rounded-full text-[14px] mt-3">
+              <button className="bg-transparent text-black hover:scale-105 transition-all duration-300 rounded-full  mt-3">
                 Login
               </button>
             </Link>
@@ -368,13 +355,13 @@ export default function Home() {
             <Link to="/signup">
               <button
                 onClick={User}
-                className="bg-white text-black hover:underline py-4 rounded-full text-[14px] mt-3"
+                className="bg-white text-black rounded-full mt-3 hover:scale-105 transition-all duration-300"
               >
                 Sign up
               </button>
             </Link>
             <Link to="/login">
-              <button className="bg-transparent text-white hover:underline py-4 rounded-full text-[14px] mt-3">
+              <button className="bg-transparent text-white hover:scale-105 transition-all duration-300  rounded-full  mt-3">
                 Login
               </button>
             </Link>

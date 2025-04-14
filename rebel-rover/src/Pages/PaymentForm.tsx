@@ -1,5 +1,5 @@
-import { Link, useLocation } from "react-router-dom";
-import { useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 interface PaymentMethod {
   id: string;
@@ -7,9 +7,20 @@ interface PaymentMethod {
   icon: string;
 }
 
+interface Booking {
+  userEmail: string;
+  destinationName: string;
+  country: string;
+  price: number;
+  image: string;
+  status: "Pending" | "Confirmed" | "Completed" | "Cancelled";
+  dateRange?: string;
+}
+
 export const PaymentForm = () => {
   const location = useLocation();
-  const { price, bookingType } = location.state || {};
+  const navigate = useNavigate();
+  const { price, bookingType, booking }: any = location.state || {};
 
   const [selectedPaymentMethod, setSelectedPaymentMethod] =
     useState<string>("credit-card");
@@ -34,7 +45,27 @@ export const PaymentForm = () => {
       return;
     }
 
+    if (booking) {
+      const allBookings: Booking[] = JSON.parse(
+        localStorage.getItem("bookings") || "[]"
+      );
+      const updatedBookings = allBookings.map((b) => {
+        if (
+          b.userEmail === booking.userEmail &&
+          b.destinationName === booking.destinationName &&
+          b.price === booking.price &&
+          b.status === "Pending"
+        ) {
+          return { ...b, status: "Confirmed" };
+        }
+        return b;
+      });
+
+      localStorage.setItem("bookings", JSON.stringify(updatedBookings));
+    }
+
     alert("Payment method details submitted successfully!");
+    navigate("/profile");
   };
 
   return (
@@ -45,8 +76,6 @@ export const PaymentForm = () => {
         </h2>
 
         <form onSubmit={handleSubmit}>
-          {/* Booking Details */}
-
           <div className="mb-6">
             <label className="block text-sm font-semibold mb-2">
               Booking Type: {bookingType}
@@ -56,7 +85,6 @@ export const PaymentForm = () => {
             </label>
           </div>
 
-          {/* Payment Method Selector */}
           <div className="mb-6">
             <label className="block text-sm font-semibold mb-2">
               Select Payment Method
@@ -80,9 +108,8 @@ export const PaymentForm = () => {
             </div>
           </div>
 
-          {/* Conditional Form Fields */}
           {selectedPaymentMethod === "credit-card" && (
-            <div>
+            <>
               <div className="mb-4">
                 <label className="block text-sm font-semibold mb-2">
                   Card Number
@@ -122,7 +149,7 @@ export const PaymentForm = () => {
                   />
                 </div>
               </div>
-            </div>
+            </>
           )}
 
           {selectedPaymentMethod === "paypal" && (
@@ -155,7 +182,6 @@ export const PaymentForm = () => {
             </div>
           )}
 
-          {/* Terms and Conditions */}
           <div className="mb-6 flex items-center">
             <input
               type="checkbox"
@@ -183,7 +209,7 @@ export const PaymentForm = () => {
       </div>
 
       <Link
-        to={{ pathname: "/profile" }}
+        to="/profile"
         className="text-blue-500 underline block mt-8 text-center"
       >
         ⬅ Back to Profile
