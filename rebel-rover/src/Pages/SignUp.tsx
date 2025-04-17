@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+
 export const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -134,7 +135,7 @@ export const Signup = () => {
           />
           <button
             type="submit"
-            className="w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700 text-sm transition"
+            className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 text-sm transition"
             disabled={loading}
           >
             {loading ? "Signing up..." : "Sign Up"}
